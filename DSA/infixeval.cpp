@@ -25,9 +25,7 @@ class Stack
 			if(top==MAX-1)
 				cout<<endl<<"Stack overflow"<<endl;
 			else
-			{
 				a[++top]=item;
-			}
 		}
 		T pop()
 		{
@@ -62,7 +60,7 @@ int precedence(char c)
 		default: return 0;
 	}
 }
-int process(int op1,int op2,char op)
+float process(float op1,float op2,char op)
 {
 	switch(op)
 	{
@@ -74,17 +72,17 @@ int process(int op1,int op2,char op)
 		default: return 0;
 	}
 }
-int operate(Stack<int> &operand,Stack<char> &sign)
+float operate(Stack<float> &operand,Stack<char> &sign)
 {
 	char op=sign.pop();
-	int op1=operand.pop();
-	int op2=operand.pop();
+	float op1=operand.pop();
+	float op2=operand.pop();
 	return process(op2,op1,op);
 }
-void evaluate(char exp[])
+float evaluate(char exp[])
 {
 	Stack<char> sign;
-	Stack<int> operand;
+	Stack<float> operand;
 	int length=strlen(exp);
 	for(int i=0;i<length;i++)
 	{
@@ -92,7 +90,7 @@ void evaluate(char exp[])
 			continue;
 		if(isdigit(exp[i]))
 		{
-			int num=0;
+			float num=0;
 			while(isdigit(exp[i]))
 			{
 				num=num*10+(exp[i]-'0');
@@ -106,9 +104,7 @@ void evaluate(char exp[])
 		else if(exp[i]==')')
 		{
 			while(!sign.isEmpty() && sign.peek()!='(')
-			{
 				operand.push(operate(operand,sign));
-			}
 			sign.pop();
 		}
 		else
@@ -120,14 +116,13 @@ void evaluate(char exp[])
 	}
 	while(!sign.isEmpty())
 		operand.push(operate(operand,sign));
-	cout<<operand.pop();
+	return operand.pop();
 }
-
 int main()
 {
 	char infix[MAX];
-	cout<<"Enter  infix expression : ";
+	cout<<"Enter infix expression : ";
 	cin>>infix;
-	evaluate(infix);
+	cout<<"Answer : "<<evaluate(infix);
 	return 0;
 }

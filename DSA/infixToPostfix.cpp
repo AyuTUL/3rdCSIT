@@ -1,13 +1,12 @@
 #include<iostream>
 #include<string.h>
-#include<math.h>
+#include<cctype>
 #define MAX 100
 using namespace std;
-template<class T>
 class Stack
 {
 	private:
-		T a[MAX];
+		char a[MAX];
 		int top;
 	public:
 		Stack()
@@ -18,29 +17,29 @@ class Stack
 		{
 			return (top==-1);
 		}
-		void push(T item)
+		void push(char item)
 		{
 			if(top==MAX-1)
 				cout<<endl<<"Stack overflow"<<endl;
 			else
 				a[++top]=item;
 		}
-		T pop()
+		char pop()
 		{
 			if(isEmpty())
 			{
 				cout<<endl<<"Stack underflow"<<endl;
-				return T();
+				return '\0';
 			}	
 			else
 				return a[top--];
 		}
-		T peek()
+		char peek()
 		{
 			if(isEmpty())
 			{
 				cout<<"Stack underflow\n";
-				return T();
+				return '\0';
 			}
 			else
 				return a[top];
@@ -58,68 +57,48 @@ int precedence(char c)
 		default: return 0;
 	}
 }
-float process(float op1,float op2,char op)
+bool isRTL(char c)
 {
-	switch(op)
-	{
-		case '^': return pow(op1,op2);
-		case '/': return op1/op2;
-		case '*': return op1*op2;
-		case '+': return op1+op2;
-		case '-': return op1-op2;
-		default: return 0;
-	}
+	return (c=='^');
 }
-float operate(Stack<float> &operand,Stack<char> &sign)
+char* convert(string exp)
 {
-	char op=sign.pop();
-	float op1=operand.pop();
-	float op2=operand.pop();
-	return process(op2,op1,op);
-}
-float evaluate(string exp)
-{
-	Stack<char> sign;
-	Stack<float> operand;
+	Stack sign;
+	char* postfix=new char[exp.length()+1];
+	int j=0;
 	for(int i=0;i<exp.length();i++)
 	{
 		if(isspace(exp[i]))
 			continue;
-		if(isdigit(exp[i]))
-		{
-			float num=0;
-			while(isdigit(exp[i]))
-			{
-				num=num*10+(exp[i]-'0');
-				i++;
-			}
-			i--;
-			operand.push(num);
-		}
+		if(isalnum(exp[i]))
+			postfix[j++]=exp[i];
 		else if(exp[i]=='(')
 			sign.push(exp[i]);
 		else if(exp[i]==')')
 		{
 			while(!sign.isEmpty() && sign.peek()!='(')
-				operand.push(operate(operand,sign));
+				postfix[j++]=sign.pop();
 			sign.pop();
 		}
 		else
 		{
-			while(!sign.isEmpty() && precedence(exp[i])<precedence(sign.peek()))
-				operand.push(operate(operand,sign));
+			while(!sign.isEmpty() && (precedence(exp[i])<precedence(sign.peek()) || (precedence(exp[i])==precedence(sign.peek()) && !isRTL(exp[i])))))
+				postfix[j++]=sign.pop();
 			sign.push(exp[i]);
 		}
 	}
 	while(!sign.isEmpty())
-		operand.push(operate(operand,sign));
-	return operand.pop();
+		postfix[j++]=sign.pop();
+	postfix[j]='\0';
+	return postfix;
 }
 int main()
 {
 	string infix;
 	cout<<"Enter infix expression : ";
 	getline(cin,infix);
-	cout<<"Answer : "<<evaluate(infix);
+	char *postfix=convert(infix);
+	cout<<"Postfix : "<<postfix;
+	delete[] postfix;
 	return 0;
 }

@@ -3,11 +3,10 @@
 #include<math.h>
 #define MAX 100
 using namespace std;
-template<class T>
 class Stack
 {
 	private:
-		T a[MAX];
+		float a[MAX];
 		int top;
 	public:
 		Stack()
@@ -18,46 +17,24 @@ class Stack
 		{
 			return (top==-1);
 		}
-		void push(T item)
+		void push(float item)
 		{
 			if(top==MAX-1)
 				cout<<endl<<"Stack overflow"<<endl;
 			else
 				a[++top]=item;
 		}
-		T pop()
+		float pop()
 		{
 			if(isEmpty())
 			{
 				cout<<endl<<"Stack underflow"<<endl;
-				return T();
+				return 0;
 			}	
 			else
 				return a[top--];
 		}
-		T peek()
-		{
-			if(isEmpty())
-			{
-				cout<<"Stack underflow\n";
-				return T();
-			}
-			else
-				return a[top];
-		}
 };
-int precedence(char c)
-{
-	switch(c)
-	{
-		case '^': return 3;
-		case '/':
-		case '*': return 2;
-		case '+':
-		case '-': return 1;
-		default: return 0;
-	}
-}
 float process(float op1,float op2,char op)
 {
 	switch(op)
@@ -70,17 +47,15 @@ float process(float op1,float op2,char op)
 		default: return 0;
 	}
 }
-float operate(Stack<float> &operand,Stack<char> &sign)
+float operate(Stack &operand,char op)
 {
-	char op=sign.pop();
 	float op1=operand.pop();
 	float op2=operand.pop();
 	return process(op2,op1,op);
 }
 float evaluate(string exp)
 {
-	Stack<char> sign;
-	Stack<float> operand;
+	Stack operand;
 	for(int i=0;i<exp.length();i++)
 	{
 		if(isspace(exp[i]))
@@ -96,30 +71,16 @@ float evaluate(string exp)
 			i--;
 			operand.push(num);
 		}
-		else if(exp[i]=='(')
-			sign.push(exp[i]);
-		else if(exp[i]==')')
-		{
-			while(!sign.isEmpty() && sign.peek()!='(')
-				operand.push(operate(operand,sign));
-			sign.pop();
-		}
 		else
-		{
-			while(!sign.isEmpty() && precedence(exp[i])<precedence(sign.peek()))
-				operand.push(operate(operand,sign));
-			sign.push(exp[i]);
-		}
+			operand.push(operate(operand,exp[i]));
 	}
-	while(!sign.isEmpty())
-		operand.push(operate(operand,sign));
 	return operand.pop();
 }
 int main()
 {
-	string infix;
-	cout<<"Enter infix expression : ";
-	getline(cin,infix);
-	cout<<"Answer : "<<evaluate(infix);
+	string postfix;
+	cout<<"Enter postfix expression : ";
+	getline(cin,postfix);
+	cout<<"Answer : "<<evaluate(postfix);
 	return 0;
 }

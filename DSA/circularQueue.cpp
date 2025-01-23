@@ -2,18 +2,18 @@
 #include<stdlib.h>
 #define MAX 3
 using namespace std;
-class Queue
+class CircularQueue
 {
 	private:
 		int a[MAX],rear,front,item;
 	public:
-		Queue()
+		CircularQueue()
 		{
 			rear=front=-1;
 		}
 		void enqueue()
 		{
-			if(rear==MAX-1)
+			if((front==0 && rear==MAX-1) ||(front==rear+1))
 				cout<<endl<<"Queue overflow"<<endl;
 			else
 			{
@@ -22,13 +22,13 @@ class Queue
 				if(front==-1 && rear==-1)
 					rear=front=0;
 				else
-					rear++;
+					rear=(rear+1)%MAX;
 				a[rear]=item;
 			}
 		}
 		void dequeue()
 		{
-			if(front==-1 && rear==-1)
+			if((rear==front) || (front==-1 && rear==-1))
 				cout<<endl<<"Queue underflow"<<endl;
 			else
 			{
@@ -36,7 +36,7 @@ class Queue
 				if(rear==front)
 					rear=front=-1;
 				else
-					front++;	
+					front=(front+1)%MAX;
 			}
 				
 		}
@@ -58,7 +58,7 @@ int main()
 {
 	int ch;
 	char c;
-	Queue q;
+	CircularQueue q;
 	do
 	{
 		cout<<"Queue Operations :\n1. Enqueue\n2. Dequeue\n3. Traverse\nEnter your choice : ";

@@ -1,6 +1,6 @@
 #include<iostream>
 #include<string.h>
-#include<cctype>
+#include<ctype.h>
 #define MAX 100
 using namespace std;
 class Stack
@@ -64,41 +64,46 @@ bool isRTL(char c)
 char* convert(string exp)
 {
 	Stack sign;
-	char* postfix=new char[exp.length()+1];
+	char* prefix=new char[exp.length()+1];
 	int j=0;
-	for(int i=0;i<exp.length();i++)
+	for(int i=exp.length()-1;i>=0;i--)
 	{
 		if(isspace(exp[i]))
 			continue;
 		if(isalnum(exp[i]))
-			postfix[j++]=exp[i];
-		else if(exp[i]=='(')
-			sign.push(exp[i]);
+			prefix[j++]=exp[i];
 		else if(exp[i]==')')
+			sign.push(exp[i]);
+		else if(exp[i]=='(')
 		{
-			while(!sign.isEmpty() && sign.peek()!='(')
-				postfix[j++]=sign.pop();
+			while(!sign.isEmpty() && sign.peek()!=')')
+			{
+				prefix[j++]=sign.pop();
+			}
 			sign.pop();
 		}
 		else
 		{
-			while(!sign.isEmpty() && (precedence(exp[i])<precedence(sign.peek()) || (precedence(exp[i])==precedence(sign.peek()) && !isRTL(exp[i]))))
-				postfix[j++]=sign.pop();
+			while(!sign.isEmpty() && (precedence(exp[i])<precedence(sign.peek()) || (precedence(exp[i])==precedence(sign.peek()) && isRTL(exp[i]))))
+				prefix[j++]=sign.pop();
 			sign.push(exp[i]);
 		}
 	}
 	while(!sign.isEmpty())
-		postfix[j++]=sign.pop();
-	postfix[j]='\0';
-	return postfix;
+		prefix[j++]=sign.pop();
+	prefix[j]='\0';
+	strrev(prefix);
+	return prefix;
 }
 int main()
 {
 	string infix;
 	cout<<"Enter infix expression : ";
 	getline(cin,infix);
-	char *postfix=convert(infix);
-	cout<<"Postfix : "<<postfix;
-	delete[] postfix;
+	char *prefix=convert(infix);
+	cout<<"Prefix : ";
+	for(int i=0;prefix[i]!='\0';i++)
+		cout<<prefix[i]<<" ";
+	delete[] prefix;
 	return 0;
 }

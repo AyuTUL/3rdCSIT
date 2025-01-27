@@ -1,0 +1,90 @@
+datatype:
+atttribute of a value/value that tells what kind of data it has
+each type has its own memory and operations that can be performed on it
+
+predefined:
+data type that is pre built and immediatley available for use by compile
+
+user defined:
+data type that are defined by user in the program
+
+class: holds data members and member functions into single unit.can be usede by creating objects of that class
+structure: to group different data types to create a single new data type
+union: similar to structure but all members share same memory location
+enum: assign names to integral constants
+
+data structure:
+way of collecting and organizing data in an ordered way to make performing operations on it effective
+data is stored in terms of some relationship for better storage and organization
+it is desgined in a way to reduce complexityi and improve efficeincy
+
+linear:
+elements are arranged in sequnce one after the another so easy to implement but inflexible
+
+array: elemetns of same type is stored in contiguous memory location
+stack: eleemnts is stored in LIFO principle
+queue: elements are stored in FIFO principle
+linked list: data elements are connected through nodes with each node containing data item and address of next node
+
+non linear:
+elements are not arranged in any sequnace but are connected in hierachical manner
+
+graph: each element is called vertex and connected to another vertex with edge
+tree: like grpah but cant be cylic
+
+linear vs non linear
+- aaranged in sequnce
+- infficeint memory utilization
+- pressent in single layer
+- all elements can in traversed in single pass
+- increased time complexity with increase in data size
+
+adt:
+type for objects whose behaviour is defined by set of values nad operations
+without specifiying how data will be organized in memory and what algorithm will be used to perfomr operations
+used to design/analyze algorithm,data structure
+data abstraction 
+
+static vs dma
+memory allocation : before / after progarm execution
+no memory reusability, cant be freed
+less effiecnt
+
+algorithm:
+set of rules to be followed to solve a problem
+
+features:
+i/o -0/more stated input and desired output
+precise- no. of steps should be stated
+finite- shouuld stop after executing finite steps
+unique- result of each step is unique and only depends on input
+effective
+
+algorithm complexity:
+decides efficieny of algorithm aaccording to input size based on 
+time factor- counting no. of key operations
+space factor- max memory space occupied by algorithm
+
+space complexity:
+amount of memory space required by algorithm in its life cycle
+
+s(x)=c+s(i)
+x: algorithm
+c: fixed part that stores variable whose size is independent of size of problem
+s(i): variable part that variable dependent
+i: instance characteristic
+
+time complexity:
+amount of time required to run to completion
+
+t(n)=c*n
+t: time
+n:input size
+c:no. of steps for one operation
+
+asymptotic complextity:
+approximate measure of time complexity
+
+big o: analyze worst case scenario
+omega: best case scenario
+theta: average case

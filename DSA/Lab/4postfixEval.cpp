@@ -1,7 +1,6 @@
 #include<iostream>
 #include<ctype.h>
 #include<math.h>
-#include<cctype>
 #define MAX 100
 using namespace std;
 class Stack
@@ -52,12 +51,12 @@ float operate(Stack &operand,char op)
 {
 	float op1=operand.pop();
 	float op2=operand.pop();
-	return process(op1,op2,op);
+	return process(op2,op1,op);
 }
 float evaluate(string exp)
 {
 	Stack operand;
-	for(int i=exp.length()-1;i>=0;i--)
+	for(int i=0;i<exp.length();i++)
 	{
 		if(isspace(exp[i]))
 			continue;
@@ -78,11 +77,10 @@ float evaluate(string exp)
 	return operand.pop();
 }
 int main()
-{	
-	system("color f0");
-	string prefix;
-	cout<<"Enter prefix expression : ";
-	getline(cin,prefix);
-	cout<<"Answer : "<<evaluate(prefix);
+{
+	string postfix;
+	cout<<"Enter postfix expression : ";
+	getline(cin,postfix);
+	cout<<"Answer : "<<evaluate(postfix);
 	return 0;
 }

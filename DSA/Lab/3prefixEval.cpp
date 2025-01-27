@@ -1,7 +1,6 @@
 #include<iostream>
 #include<ctype.h>
 #include<math.h>
-#include<cctype>
 #define MAX 100
 using namespace std;
 class Stack
@@ -79,7 +78,6 @@ float evaluate(string exp)
 }
 int main()
 {	
-	system("color f0");
 	string prefix;
 	cout<<"Enter prefix expression : ";
 	getline(cin,prefix);

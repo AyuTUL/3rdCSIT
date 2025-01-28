@@ -1,4 +1,5 @@
 #include<iostream>
+#include<string>
 #include<ctype.h>
 #include<math.h>
 #define MAX 100
@@ -35,6 +36,10 @@ class Stack
 				return a[top--];
 		}
 };
+bool isOperator(char c)
+{
+	return (c=='^' || c=='/' || c=='*' || c=='+' || c=='-');
+}
 float process(float op1,float op2,char op)
 {
 	switch(op)
@@ -71,8 +76,14 @@ float evaluate(string exp)
 			i--;
 			operand.push(num);
 		}
-		else
+		else if(isOperator(exp[i]))
 			operand.push(operate(operand,exp[i]));
+		else
+		{
+			cout<<endl<<"Invalid input"<<endl;
+			return 0;
+			
+		}
 	}
 	return operand.pop();
 }

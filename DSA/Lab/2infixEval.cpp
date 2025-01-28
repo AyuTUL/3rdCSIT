@@ -39,13 +39,17 @@ class Stack
 		{
 			if(isEmpty())
 			{
-				cout<<"Stack underflow\n";
+				cout<<endl<<"Stack underflow"<<endl;
 				return T();
 			}
 			else
 				return a[top];
 		}
 };
+bool isOperator(char c)
+{
+	return (c=='^' || c=='/' || c=='*' || c=='+' || c=='-');
+}
 int precedence(char c)
 {
 	switch(c)
@@ -104,11 +108,16 @@ float evaluate(string exp)
 				operand.push(operate(operand,sign));
 			sign.pop();
 		}
-		else
+		else if(isOperator(exp[i]))
 		{
 			while(!sign.isEmpty() && precedence(exp[i])<precedence(sign.peek()))
 				operand.push(operate(operand,sign));
 			sign.push(exp[i]);
+		}
+		else
+		{
+			cout<<endl<<"Invalid output"<<endl;
+			return 0;
 		}
 	}
 	while(!sign.isEmpty())

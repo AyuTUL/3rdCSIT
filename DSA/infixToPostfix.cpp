@@ -1,6 +1,6 @@
 #include<iostream>
-#include<string.h>
-#include<cctype>
+#include<string>
+#include<ctype.h>
 #define MAX 100
 using namespace std;
 class Stack

@@ -1,6 +1,7 @@
 #include<iostream>
-#include<ctype.h>
+#include<string>
 #include<math.h>
+#include<cctype>
 #define MAX 100
 using namespace std;
 class Stack
@@ -35,6 +36,10 @@ class Stack
 				return a[top--];
 		}
 };
+bool isOperator(char c)
+{
+	return (c=='^' || c=='/' || c=='*' || c=='+' || c=='-');
+}
 float process(float op1,float op2,char op)
 {
 	switch(op)
@@ -62,17 +67,24 @@ float evaluate(string exp)
 			continue;
 		if(isdigit(exp[i]))
 		{
-			float num=0;
+			float num=0,place=1;
 			while(isdigit(exp[i]))
 			{
-				num=num*10+(exp[i]-'0');
-				i++;
+				num=num+(exp[i]-'0')*place;
+				place*=10;
+				i--;
 			}
-			i--;
+			i++;
 			operand.push(num);
 		}
-		else
+		else if(isOperator(exp[i]))
 			operand.push(operate(operand,exp[i]));
+		else
+		{
+			cout<<endl<<"Invalid input"<<endl;
+			return 0;
+		}
+			
 	}
 	return operand.pop();
 }

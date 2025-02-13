@@ -2,7 +2,7 @@
 #include<stdio.h>
 #include<conio.h>
 #include<math.h>
-#define F(x) (x*x-x-1)
+#define F(x) (x*x-4*x-10)
 #define E 0.001
 int main()
 {
@@ -10,19 +10,21 @@ int main()
 	int i=1;
 	printf("Enter 2 initial guesses x1 & x2 : ");
 	scanf("%f%f",&x1,&x2);
-	while(1)
+	printf("--------------------------------------------------------------------------------------\n");
+	printf("| %-9s | %-9s | %-9s | %-10s | %-9s | %-9s | %-9s |\n","Iteration","x_{i-1}","x_i","f(x_{i-1})","f(x_i)","x_{i+1}","Error");
+	printf("--------------------------------------------------------------------------------------\n");
+	do
 	{
 		f1=F(x1);
 		f2=F(x2);
 		x3=x2-f2*(x2-x1)/(f2-f1);
-		e=fabs(x1-x2);
-		printf("\nIteration %d  : \nx%d= %f\nError = %f\n",i,i+2,x3,e);
-		getch();
+		e=fabs(x3-x2);
+		printf("| %9d | %9f | %9f | %10f | %9f | %9f | %9f |\n",i,x1,x2,f1,f2,x3,e);
 		x1=x2;
 		x2=x3;
-		i++;
-		if(e<E)
-			break;		
-	}
-	printf("\nRoot = %f",x1);
+		i++;		
+	}while(e>=E);
+	printf("--------------------------------------------------------------------------------------\n");
+	printf("\nRoot = %f",x3);
+	return 0;
 }       

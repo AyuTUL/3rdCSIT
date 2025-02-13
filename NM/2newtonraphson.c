@@ -2,8 +2,8 @@
 #include<stdio.h>
 #include<conio.h>
 #include<math.h>
-#define F(x) (x*x-x-1)
-#define D(x) (2*x-1)
+#define F(x) (pow(x,3)-5*x+3)
+#define D(x) (3*x*x-5)
 #define E 0.001
 int main()
 {
@@ -11,23 +11,25 @@ int main()
 	int i=1;
 	printf("Enter initial guess x1 : ");
 	scanf("%f",&x1);
-	while(1)
+	printf("-------------------------------------------------------------------------\n");
+	printf("| %-9s | %-9s | %-9s | %-9s | %-9s | %-9s |\n","Iteration","x_n","f(x_n)","f'(x_n)","x_{n+1}","Error");
+	printf("-------------------------------------------------------------------------\n");
+	do
 	{
 		f0=F(x1);
 		f1=D(x1);
 		if(f1==0)
-			printf("Method can't continue because of divide  by 0 error.");
+			printf("Method can't continue because of divide by 0 error.");
 		else
 		{
 			x2=x1-f0/f1;
 			e=fabs(x1-x2);
+			printf("| %9d | %9f | %9f | %9f | %9f | %9f |\n",i,x1,f0,f1,x2,e);
 			x1=x2;
-			printf("\nIteration %d  : \nx%d= %f\nError = %f\n",i,i+1,x1,e);
-			getch();
-			i++;
-			if(e<E)
-				break;		
+			i++;	
 		}
-	}
+	}while(e>=E);
+	printf("-------------------------------------------------------------------------\n");
 	printf("\nRoot = %f",x1);
+	return 0;
 }       

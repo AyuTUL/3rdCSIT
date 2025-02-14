@@ -1,6 +1,5 @@
 //Lab 2 : WAP to find a root of non linear equation using Newton Raphson method
 #include<stdio.h>
-#include<conio.h>
 #include<math.h>
 #define F(x) (pow(x,3)-5*x+3)
 #define D(x) (3*x*x-5)

@@ -28,7 +28,7 @@ class CircularQueue
 		}
 		void dequeue()
 		{
-			if((rear==front) || (front==-1 && rear==-1))
+			if(front==-1 && rear==-1)
 				cout<<endl<<"Queue underflow"<<endl;
 			else
 			{

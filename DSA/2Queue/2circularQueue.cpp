@@ -11,6 +11,10 @@ class CircularQueue
 		{
 			rear=front=-1;
 		}
+		bool isEmpty()
+		{
+			return(front==-1 && rear==-1);
+		}
 		void enqueue()
 		{
 			if((front==0 && rear==MAX-1) || (front==rear+1))
@@ -28,7 +32,7 @@ class CircularQueue
 		}
 		void dequeue()
 		{
-			if(front==-1 && rear==-1)
+			if(isEmpty())
 				cout<<endl<<"Queue underflow"<<endl;
 			else
 			{
@@ -41,7 +45,7 @@ class CircularQueue
 		}
 		void traverse()
 		{
-			if(front==-1 && rear==-1)
+			if(isEmpty())
 				cout<<endl<<"Queue underflow"<<endl;
 			else
 			{
@@ -62,7 +66,7 @@ int main()
 	CircularQueue q;
 	do
 	{
-		cout<<"Circular Queue Operations :\n1. Enqueue\n2. Dequeue\n3. Traverse\nEnter your choice : ";
+		cout<<"Circular Queue Operations :\n1. Enqueue\n2. Dequeue\n3. Traverse\n4. Exit\nEnter your choice : ";
 		cin>>ch;
 		switch(ch)
 		{
@@ -75,6 +79,8 @@ int main()
 			case 3:
 				q.traverse();
 				break;
+			case 4:
+				exit(0);
 			default:
 				cout<<"Invalid input"<<endl;	
 		}

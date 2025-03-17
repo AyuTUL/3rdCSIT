@@ -11,7 +11,7 @@ class Queue
 		{
 			rear=front=-1;
 		}
-		isEmpty()
+		bool isEmpty()
 		{
 			return(front==-1 && rear==-1);
 		}
@@ -64,7 +64,7 @@ int main()
 	Queue q;
 	do
 	{
-		cout<<"Queue Operations :\n1. Enqueue\n2. Dequeue\n3. Traverse\nEnter your choice : ";
+		cout<<"Queue Operations :\n1. Enqueue\n2. Dequeue\n3. Traverse\n4. Exit\nEnter your choice : ";
 		cin>>ch;
 		switch(ch)
 		{
@@ -76,7 +76,9 @@ int main()
 				break;
 			case 3:
 				q.traverse();
-				break;
+				break
+			case 4:
+				exit(0);
 			default:
 				cout<<"Invalid input"<<endl;	
 		}

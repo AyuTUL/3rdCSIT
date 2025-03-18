@@ -1,41 +1,136 @@
 #include<iostream>
 using namespace std;
-struct Node
+struct NODE
 {
 	int data;
 	struct Node* next;
 };
+typedef struct NODE Node;
 class LinkedList
 {
 	private:
-		struct Node* head;
+		Node* head;
 	public:
 		LinkedList()
 		{
 			head=NULL;
 		}
-		struct *Node insertNode()
+		*Node createNode()
 		{
-			struct Node *newNode=new Node();
+			Node *newNode=new Node();
 			cout<<endl<<"Enter data to be inserted at front : ";
 			cin>>newNode->data;
 			return(newNode);
 		}
 		void insertAtFront()
 		{
-			struct Node *newNode=insertNode();
+			Node *newNode=createNode();
 			newNode->next=head;
 			head=newNode;
 		}
 		void insertAtEnd()
 		{
+			Node *newNode=createNode();
+			newNode->data=item;
 			if(head==NULL)
+			{
 				newNode->next=NULL;
-				head=newNode;
+				head=newNode;	
+			}	
 			else
 			{
-				
+				Node *temp=new Node();
+				temp=head;
+				while(temp->next!=NULL)
+					temp=temp->next;
+				temp->next=newNode;
+				newNode->next=NULL;
+				free(temp);
 			}
+		}
+		void insertBeforeNode()
+		{
+			int n;
+			cout<<"Enter position of node to be inserted before : ";
+			cin>>n;
+			Node *newNode=createNode();
+			Node *temp=new Node();
+			for(int i=1;i<n-1;i++)
+				temp=temp->next;
+			newNode->next=temp->next;
+			temp->next=newNode;
+			free(temp);
+		}
+		void insertAfterNode()
+		{
+			int n;
+			cout<<"Enter position of node to be inserted after : ";
+			cin>>n;
+			Node *newNode=createNode();
+			Node *temp=new Node();
+			for(int i=1;i<n;i++)
+				temp=temp->next;
+			newNode->next=temp->next;
+			temp->next=newNode;
+			free(temp);
+		}
+		void deleteAtFront()
+		{
+			if(head==NULL)
+				cout<<"Linked list underflow";
+			else
+			{
+				Node *temp=new Node();
+				temp=head;
+				head=temp->next;
+				temp->next=NULL;
+				free(temp);
+			}
+		}
+		void deleteAtEnd()
+		{
+			if(head==NULL)
+				cout<<"Linked list underflow";
+			else if(head->next==NULL)
+			{
+				Node *temp=new Node();
+				temp=head;
+				head=NULL;
+				free(temp);
+			}
+			else
+			{
+				Node *temp1=new Node();
+				Node *temp2=new Node();
+				temp1=head;
+				while(temp1->next!=NULL)
+				{
+					temp2=temp1;
+					temp1=temp1->next;
+				}
+				temp2->next=NULL;
+				free(temp1);
+			}
+		}
+		void  deleteAtNode()
+		{
+			int n;
+			cout<<"Enter position of node to be deleted : ";
+			cin>>n;
+			Node *temp1=new Node();
+			Node *temp2=new Node();
+			temp1=head;
+			for(inti=1;i<n;i++)
+			{
+				temp2=temp1;
+				temp1=temp1->next;
+			}
+			temp2->next=temp->next;
+			temp1->next=NULL;
+			free(temp1);
+		}
+		void deleteBeforeNode()
+		{
 			
 		}
 		void traverse()

@@ -49,14 +49,10 @@ class CircularQueue
 				cout<<endl<<"Queue underflow"<<endl;
 			else
 			{
-            	int i=front;
-            	while(i!=rear) 
-				{
+            	for(int i=front;i!=rear;i=(i+1)%MAX)
 					cout<<a[i]<<"\t";
-                	i=(i+1)%MAX;
-                }
-            }
-            cout<<a[rear]<<endl; 
+				cout<<a[rear]<<endl; 
+            }  
 		}
 };
 int main()

@@ -1,4 +1,3 @@
-
 #include<iostream>
 #include<stdlib.h>
 #define MAX 3
@@ -109,8 +108,7 @@ int main()
 		switch(ch1)
 		{
 			case 1:
-				system("cls");
-				cout<<"Insertion Operations :\n1. Enqueue at the beginning\n2. Enqueue at the end\nEnter your choice : ";
+				cout<<endl<<"Enqueue Operations :\n1. Enqueue at the beginning\n2. Enqueue at the end\nEnter your choice : ";
 				cin>>ch2;
 				if(ch2==1)
 					d.enqueueAtFront();
@@ -120,8 +118,7 @@ int main()
 					cout<<"Invalid input"<<endl;
 				break;
 			case 2:
-				system("cls");
-				cout<<"Deletion Operations :\n1. Dequeue at the beginning\n2. Dequeue at the end\nEnter your choice : ";
+				cout<<endl<<"Dequeue Operations :\n1. Dequeue at the beginning\n2. Dequeue at the end\nEnter your choice : ";
 				cin>>ch2;
 				if(ch2==1)
 					d.dequeueAtFront();

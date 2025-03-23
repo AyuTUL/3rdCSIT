@@ -82,7 +82,7 @@ class LinkedList
 			{
 				Node *temp=head;
 				head=temp->next;
-				cout<<"Deleted data : "<<temp->data<<endl;
+				cout<<endl<< "Deleted data : "<<temp->data<<endl;
 				delete temp;
 			}
 		}

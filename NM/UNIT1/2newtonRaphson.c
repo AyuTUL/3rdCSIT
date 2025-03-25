@@ -23,12 +23,12 @@ int main()
 		{
 			x2=x1-f1/f2;
 			e=fabs(x2-x1);
-			printf("| %9d | %9f | %9f | %9f | %9f | %9f |\n",i,x1,f1,f2,x2,e);
+			printf("| %9d | %9.5f | %9.5f | %9.5f | %9.5f | %9.5f |\n",i,x1,f1,f2,x2,e);
 			x1=x2;
 			i++;	
 		}
 	}while(e>=E);
 	printf("-------------------------------------------------------------------------\n");
-	printf("\nRoot = %f",x1);
+	printf("Root = %.5f",x1);
 	return 0;
 }       

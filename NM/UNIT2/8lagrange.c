@@ -1,4 +1,4 @@
-//Lab 8: WAP in C to interpolate given data set using Lagrange interpolation 
+//Lab 8 : WAP in C that interpolates given data set using Lagrange interpolation 
 #include<stdio.h>
 #define MAX 10
 int main()
@@ -20,6 +20,6 @@ int main()
 				p*=(xv-x[j])/(x[i]-x[j]);
 		v+=p*fx[i];
 	}
-	printf("\nf(%g) = %.4f",xv,v);
+	printf("\nf(%g) = %.5f",xv,v);
 	return 0;
 }

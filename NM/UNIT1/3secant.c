@@ -1,4 +1,4 @@
-//Lab 3 : WAP to find a root of non linear equation using Secant method
+//Lab 3 : WAP in C that finds a root of non linear equation using Secant method
 #include<stdio.h>
 #include<math.h>
 #define F(x) (x*x-4*x-10)

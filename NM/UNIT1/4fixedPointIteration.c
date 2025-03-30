@@ -1,4 +1,4 @@
-//lab 4: WAP to find a root of non-linear equation x*e^x-1=0 using fixed point iteration method
+//Lab 4 : WAP in C that finds a root of non-linear equation x*e^x-1=0 using fixed point iteration method
 #include<stdio.h>
 #include<math.h>
 #define F(x) (x*exp(x)-1)
@@ -17,11 +17,11 @@ int main()
 	{
 		x1=G(x0);
 		e=fabs(x1-x0);
-		printf("| %9d | %9f | %9f | %9f |\n",i,x0,x1,e);
+		printf("| %9d | %9.5f | %9.5f | %9.5f |\n",i,x0,x1,e);
 		x0=x1;
 		i++;
 	}while(e>=E);
 	printf("-------------------------------------------------\n");
-	printf("\nRoot = %f",x1);
+	printf("Root = %.5f",x1);
 	return 0;
 }	       

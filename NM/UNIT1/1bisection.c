@@ -1,4 +1,4 @@
-//Lab 1: WAP in C program that finds root of function f(x)=xe^x-1 using bisection method
+//Lab 1: WAP in C that finds root of function f(x)=xe^x-1 using bisection method
 #include<stdio.h>
 #include<math.h>
 #define E 0.001

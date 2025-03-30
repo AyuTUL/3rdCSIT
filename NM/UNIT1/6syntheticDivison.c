@@ -1,4 +1,4 @@
-//Lab 6: WAP in C that divides a polynomial function by (x-c) using synthetic division to find quotient and remainder
+//Lab 6 : WAP in C that divides a polynomial function by (x-c) using synthetic division to find quotient and remainder
 #include<stdio.h>
 #include<math.h>
 #define MAX 30
@@ -8,10 +8,10 @@ int main()
 	int i,m,n,c,r;
 	printf("Enter degree  of polynomial : ");
 	scanf("%d",&n);
-	printf("Enter coefficients of dividend polynomial : ");
+	printf("Enter coefficients of dividend polynomial of order %d (a%d - a0) : ",n,n);
 	for(i=n;i>=0;i--)
 		scanf("%d",&a[i]);
-	printf("Enter constant term of divsor polynomial : ");
+	printf("Enter constant term of divisor polynomial : ");
 	scanf("%d",&c);
 	b[n]=0;
 	m=n;
@@ -20,7 +20,7 @@ int main()
 		b[m-1]=a[m]+b[m]*c;
 		m--;
 	}
-	printf("Quotient = ");
+	printf("\nQuotient = ");
 	m=n-1;
 	while(m>=0)
 	{

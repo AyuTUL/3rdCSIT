@@ -1,4 +1,4 @@
-//Lab 10: WAP in C to interpolate given data set using Newton's forward difference interpolation formula
+//Lab 10 : WAP in C that interpolates given data set using Newton's forward difference interpolation formula
 #include<stdio.h>
 #define MAX 10
 int fact(int n)
@@ -34,6 +34,6 @@ int main()
 			p=p*(s-j+1);
 		v+=(fd[i]*p)/fact(i);
 	}
-	printf("\nf(%g) = %.4f",xv,v);
+	printf("\nf(%g) = %.5f",xv,v);
 	return 0;
 }

@@ -25,7 +25,7 @@ int  main()
 	int i,n,m;
 	printf("Enter degree of polynomial : ");
 	scanf("%d",&n);
-	printf("Enter coefficients of dividend polynomial : ");
+	printf("Enter coefficients of dividend polynomial of order %d (a%d - a0) : ",n,n);
 	for(i=n;i>=0;i--)
 		scanf("%f",&a[i]);
 	printf("Enter initial guess : ");

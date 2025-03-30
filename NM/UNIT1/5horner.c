@@ -1,4 +1,4 @@
-//Lab 5: WAP in C program to evaluate polynomial 3x^3+2x^2+4x+5 at x=3 using Horner method
+//Lab 5 : WAP in C that evaluates a polynomial at a point using Horner method
 #include<stdio.h>
 #define MAX 10
 int main()
@@ -9,7 +9,7 @@ int main()
 	printf("Enter coefficients of polynomial of order %d (a%d - a0) : ",n,n);
 	for(i=n;i>=0;i--)
 		scanf("%d",&a[i]);
-	printf("Enter the point at which polynomial is to evaluated : ");
+	printf("Enter the point at which polynomial is to be evaluated : ");
 	scanf("%d",&xv);
 	b[n]=a[n];
 	for(i=n;i>0;i--)

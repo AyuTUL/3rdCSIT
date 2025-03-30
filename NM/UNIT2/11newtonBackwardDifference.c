@@ -1,4 +1,4 @@
-//Lab 11 : WAP in Cto interpolate given data set using Newton Backward difference formula
+//Lab 11 : WAP in C that interpolates given data set using Newton Backward difference formula
 #include<stdio.h>
 #define MAX 10
 int fact(int n)
@@ -10,6 +10,7 @@ int fact(int n)
 }
 int main()
 {
+	system("color f0");
 	int n,i,j;
 	float v=0,p,xv,x[MAX],fx[MAX],bd[MAX],h,s;
 	printf("Enter no. of data points : ");
@@ -34,6 +35,6 @@ int main()
 			p=p*(s+j-1);
 		v+=(bd[n-i-1]*p)/fact(i);
 	}
-	printf("\nf(%g) = %.4f",xv,v);
+	printf("\nf(%g) = %.5f",xv,v);
 	return 0;
 }

@@ -10,7 +10,6 @@ int fact(int n)
 }
 int main()
 {
-	system("color f0");
 	int n,i,j;
 	float v=0,p,xv,x[MAX],fx[MAX],bd[MAX],h,s;
 	printf("Enter no. of data points : ");

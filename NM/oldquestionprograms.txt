@@ -1,0 +1,14 @@
+program:
+heuns 3
+newtons dd interpolation
+gauss elim
+
+derive:
+secant 2
+bisection
+fixed point iteration 
+
+revise:
+spline
+
+

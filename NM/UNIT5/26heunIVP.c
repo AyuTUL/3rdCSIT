@@ -17,7 +17,7 @@ int main()
 	{
 		m1=f(x,y);
 		m2=f(x+h,y+h*m1);
-		y+=(h/2*(m1+m2));
+		y+=((h/2)*(m1+m2));
 		printf("\n\ty(%.2f) = %.5f",x+h,y);
 	}
 	return 0;

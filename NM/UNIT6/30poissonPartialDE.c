@@ -1,9 +1,8 @@
 #include<stdio.h>
 #include<math.h>
-#include<stdlib.h>
 #define N 10
 #define ERROR 0.00001
-#define F(x,y) (3*(x)*(x)*(y))
+#define F(x,y) (x*y)
 void initializeGrid(float u[][N],int n,float f) 
 {
     int i,j;
@@ -23,7 +22,6 @@ void printGrid(float u[][N],int n)
 }
 int main() 
 {
-	system("color f0");
     float u[N][N],diff,maxDiff;
     int n,i,j,itr=0;
     float h,f;

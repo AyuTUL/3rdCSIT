@@ -1,4 +1,4 @@
-//Lab 28 : WAP in C that solves system of ODE’s by using Euler’s method
+//Lab 28 : WAP in C that solves system of ODE by using Euler's method
 #include<stdio.h>
 #include<math.h>
 #define f1(x,y,z) (z)
@@ -18,8 +18,8 @@ int main()
 	printf("Using Euler's method,");
 	for(x=x0;x<xp;x+=h)
 	{
-		ny=y+(f1(x,y,z))*h;
-		nz=z+(f2(x,y,z))*h;
+		ny=y+h*f1(x,y,z);
+		nz=z+h*f2(x,y,z);
 		y=ny;
 		z=nz;
 		printf("\n\ty(%.2f) = %.5f",x+h,y);

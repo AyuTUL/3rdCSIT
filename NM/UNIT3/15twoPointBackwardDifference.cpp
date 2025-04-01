@@ -1,11 +1,9 @@
 //Lab 15 : WAP in C that finds derivative of a function using 2 point backward difference formula
 #include<stdio.h>
 #include<math.h>
-#include<stdlib.h>
 #define F(x) (1+sin(x))
 int main()
 {
-	system("color f0");
 	float f1,f2,h,xi,x1,d;
 	printf("Enter the point at which 1st derivative is to be evaluated : ");
 	scanf("%f",&xi);

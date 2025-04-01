@@ -12,10 +12,10 @@ int main()
 		scanf("%f%f",&x[i],&y[i]);
 	for(i=0;i<n;i++)
 	{
-		sx=sx+x[i];
-		sy=sy+y[i];
-		sxy=sxy+x[i]*y[i];
-		sx2=sx2+x[i]*x[i];
+		sx+=x[i];
+		sy+=y[i];
+		sxy+=(x[i]*y[i]);
+		sx2+=(x[i]*x[i]);
 	}
 	b=((n*sxy)-(sx*sy))/((n*sx2)-(sx*sx));
 	a=(sy/n)-(b*sx/n);

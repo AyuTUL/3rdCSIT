@@ -16,7 +16,7 @@ int main()
 	printf("Using Euler's method,");
 	for(x=x0;x<xp;x+=h)
 	{
-		y+=(f(x,y)*h);
+		y+=(h*f(x,y));
 		printf("\n\ty(%.2f) = %.5f",x+h,y);
 	}
 	return 0;	

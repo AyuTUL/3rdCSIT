@@ -7,12 +7,12 @@ struct NODE
 	struct NODE* next;
 };
 typedef struct NODE Node;
-class LinkedList
+class CircularLinkedList
 {
 	private:
 		Node* head;
 	public:
-		LinkedList()
+		CircularLinkedList()
 		{
 			head=NULL;
 		}
@@ -20,7 +20,7 @@ class LinkedList
 		{
 			return(head==NULL);
 		}
-		~LinkedList()
+		~CircularLinkedList()
 		{
 			while(!isEmpty())
 				deleteAtFront();
@@ -36,21 +36,38 @@ class LinkedList
 		void insertAtFront()
 		{
 			Node *newNode=createNode();
-			newNode->next=head;
-			head=newNode;
+			if(isEmpty())
+			{
+				head=newNode;
+				newNode->next=head;
+			}
+			else
+			{
+				Node *temp=head;
+				while(temp->next!=head)
+					temp=temp->next;	
+				newNode->next=head;
+				head=newNode;
+				temp->next=head;
+			}
 			cout<<endl<<"Inserted "<<newNode->data<<" at the front"<<endl;
 		}
 		void insertAtEnd()
 		{
 			Node *newNode=createNode();
 			if(isEmpty())
-				head=newNode;	
+			{
+				head=newNode;
+				newNode->next=head;
+			}				
 			else
 			{
 				Node *temp=head;
-				while(temp->next!=NULL)
+				do
 					temp=temp->next;
+				while(temp->next!=head);
 				temp->next=newNode;
+				newNode->next=head;
 			}
 			cout<<endl<<"Inserted "<<newNode->data<<" at the end"<<endl;
 		}
@@ -61,9 +78,9 @@ class LinkedList
 			else
 			{
 				Node *temp=head;
-				for(int i=1;i<n && temp!=NULL;i++)
+				for(int i=1;i<n && temp->next!=head;i++)
 					temp=temp->next;
-				if(temp==NULL)
+				if(temp->next==head)
 					insertAtEnd();
 				else
 				{
@@ -78,10 +95,20 @@ class LinkedList
 		{
 			if(isEmpty())
 				cout<<endl<<"Linked list is empty"<<endl;
+			else if(head->next==head)
+			{
+				cout<<endl<<"Deleted data : "<<head->data<<endl;
+				delete head;
+				head=NULL;
+			}
 			else
 			{
 				Node *temp=head;
-				head=temp->next;
+				Node *last=head;
+				while(last->next!=head)
+					last=last->next;
+				head=head->next;
+				last->next=head;
 				cout<<endl<<"Deleted data : "<<temp->data<<endl;
 				delete temp;
 			}
@@ -90,18 +117,18 @@ class LinkedList
 		{
 			if(isEmpty())
 				cout<<endl<<"Linked list is empty"<<endl;
-			else if(head->next==NULL)
+			else if(head->next==head)
 				deleteAtFront();
 			else
 			{
 				Node *temp1=head;
 				Node *temp2=NULL;
-				while(temp1->next!=NULL)
+				while(temp1->next!=head)
 				{
 					temp2=temp1;
 					temp1=temp1->next;
 				}
-				temp2->next=NULL;
+				temp2->next=head;
 				cout<<"Deleted data : "<<temp1->data<<endl;
 				delete temp1;
 			}
@@ -118,12 +145,12 @@ class LinkedList
 			{
 				Node *temp1=head;
 				Node *temp2=NULL;
-				for(int i=1;i<n && temp1!=NULL;i++)
+				for(int i=1;i<n && temp1->next!=head;i++)
 				{
 					temp2=temp1;
 					temp1=temp1->next;
 				}
-				if(temp1==NULL)
+				if(temp1->next==head && i<n-1)
 					cout<<"Position exceeds linked list length";
 				else
 				{
@@ -144,7 +171,7 @@ class LinkedList
 				cout<<endl<<"Enter data to be searched : ";
 				cin>>key;
 				Node *temp=head;
-				while(temp!=NULL)
+				do
 				{
 					if(temp->data==key)
 					{
@@ -153,12 +180,12 @@ class LinkedList
 					}
 					temp=temp->next;
 					pos++;
-				}
+				}while(temp!=head);
 				if(found)
 					cout<<endl<<"Element "<<key<<" found at position "<<pos<<endl;
 				else
-					cout<<endl<<"Element "<<key<<" not found in linked list"<<endl;	
-			}		
+					cout<<endl<<"Element "<<key<<" not found in linked list"<<endl;
+			}
 		}
 		void traverse()
 		{
@@ -168,18 +195,18 @@ class LinkedList
 			{
 				cout<<endl<<"Linked List :"<<endl;
 				Node* temp=head;
-				while(temp!=NULL)
+				do
 				{
 					cout<<temp->data<<"\t";
 					temp=temp->next;
-				}	
+				}while(temp!=head);	
 			}
 			cout<<endl;
 		}
 };
 int main()
 {
-	LinkedList list;
+	CircularLinkedList list;
 	int ch1,ch2;
 	char choice;
 	do

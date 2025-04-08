@@ -17,7 +17,7 @@ class CircularQueue
 		}
 		void enqueue()
 		{
-			if((front==0 && rear==MAX-1) || (front==rear+1))
+			if((front==0 && rear==MAX-1) || ((front==rear+1)%MAX))
 				cout<<endl<<"Queue overflow"<<endl;
 			else
 			{
@@ -37,7 +37,7 @@ class CircularQueue
 			else
 			{
 				cout<<endl<<"Dequeued item  = "<<a[front]<<endl;
-				if(rear==front)
+				if(front==rear)
 					rear=front=-1;
 				else
 					front=(front+1)%MAX;
@@ -49,6 +49,7 @@ class CircularQueue
 				cout<<endl<<"Queue underflow"<<endl;
 			else
 			{
+				cout<<endl;
             	for(int i=front;i!=rear;i=(i+1)%MAX)
 					cout<<a[i]<<"\t";
 				cout<<a[rear]<<endl; 

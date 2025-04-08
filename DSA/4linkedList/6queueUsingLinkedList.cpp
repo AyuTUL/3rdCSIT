@@ -1,34 +1,44 @@
 #include<iostream>
 #include<stdlib.h>
-#define MAX 3
 using namespace std;
+struct NODE
+{
+	int data;
+	struct NODE* next;
+};
+typedef struct NODE Node;
 class Queue
 {
 	private:
-		int a[MAX],rear,front,item;
+		Node *front,*rear;
 	public:
 		Queue()
 		{
-			rear=front=-1;
+			front=rear=NULL;
 		}
 		bool isEmpty()
 		{
-			return(front==-1 && rear==-1);
+			return(rear==NULL);
+		}
+		~Queue()
+		{
+			while(!isEmpty())
+				dequeue();
 		}
 		void enqueue()
 		{
-			if(rear==MAX-1)
-				cout<<endl<<"Queue overflow"<<endl;
+			Node *newNode=new Node();
+			cout<<endl<<"Enter data to be enqueued : ";
+			cin>>newNode->data;			
+			newNode->next=NULL;
+			if(isEmpty())
+				front=rear=newNode;
 			else
 			{
-				cout<<endl<<"Enter item to be queued : ";
-				cin>>item;
-				if(isEmpty())
-					rear=front=0;
-				else
-					rear++;
-				a[rear]=item;
-			}
+				rear->next=newNode;
+				rear=newNode;
+			}	
+			cout<<endl<<"Enqueued "<<newNode->data<<" to queue"<<endl;
 		}
 		void dequeue()
 		{
@@ -36,12 +46,13 @@ class Queue
 				cout<<endl<<"Queue underflow"<<endl;
 			else
 			{
-				cout<<endl<<"Dequeued item  = "<<a[front]<<endl;
-				if(rear==front)
-					rear=front=-1;
-				else
-					front++;	
-			}			
+				Node *temp=front;
+				cout<<endl<<"Dequeued item = "<<temp->data<<endl;
+				front=front->next;
+				if(front==NULL)
+					rear=NULL;
+				delete temp;
+			}	
 		}
 		void traverse()
 		{
@@ -49,12 +60,15 @@ class Queue
 				cout<<endl<<"Queue underflow"<<endl;
 			else
 			{
-				cout<<endl;
-				for(int i=front;i<=rear;i++)
-					cout<<a[i]<<"\t";
+				cout<<endl<<"Queue :"<<endl;
+				Node *temp=front;
+				while(temp!=NULL)
+				{
+					cout<<temp->data<<"\t";
+					temp=temp->next;
+				}
 				cout<<endl;
 			}
-			
 		}
 };
 int main()
@@ -76,12 +90,12 @@ int main()
 				break;
 			case 3:
 				q.traverse();
-				break
+				break;
 			case 4:
 				cout<<"Exiting program";
 				return 0;
 			default:
-				cout<<"Invalid input"<<endl;	
+				cout<<endl<<"Invalid input"<<endl;	
 		}
 		cout<<endl<<"Again? (Y/N) : ";
 		cin>>c;

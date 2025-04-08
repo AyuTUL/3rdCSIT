@@ -40,7 +40,7 @@ class DoublyLinkedList
 			if(head!=NULL)
 				head->prev=newNode;
 			head=newNode;
-			cout<<"\nInserted "<<newNode->data<<" at the front\n";
+			cout<<endl<<"Inserted "<<newNode->data<<" at the front"<<endl;
 		}
 		void insertAtEnd()
 		{
@@ -55,7 +55,7 @@ class DoublyLinkedList
 				temp->next=newNode;
 				newNode->prev=temp;
 			}
-			cout<<"\nInserted "<<newNode->data<<" at the end\n";
+			cout<<endl<<"Inserted "<<newNode->data<<" at the end"<<endl;
 		}
 		void insertAtMiddle(int n)
 		{
@@ -76,28 +76,28 @@ class DoublyLinkedList
 					if(temp->next!=NULL)
 						temp->next->prev=newNode;
 					temp->next=newNode;
-					cout<<"\nInserted "<<newNode->data<<" at position "<<n<<endl;
+					cout<<endl<<"Inserted "<<newNode->data<<" at position "<<n<<endl;
 				}
 			}	
 		}
 		void deleteAtFront()
 		{
 			if(isEmpty())
-				cout<<"\nLinked list is empty\n";
+				cout<<endl<<"Linked list is empty"<<endl;
 			else
 			{
 				Node *temp=head;
 				head=temp->next;
 				if(head!=NULL)
 					head->prev=NULL;
-				cout<<endl<< "Deleted data : "<<temp->data<<endl;
+				cout<<endl<<"Deleted data : "<<temp->data<<endl;
 				delete temp;
 			}
 		}
 		void deleteAtEnd()
 		{
 			if(isEmpty())
-				cout<<"\nLinked list is empty\n";
+				cout<<endl<<"Linked list is empty"<<endl;
 			else if(head->next==NULL)
 				deleteAtFront();
 			else
@@ -113,7 +113,7 @@ class DoublyLinkedList
 		void deleteAtMiddle(int n)
 		{
 			if(isEmpty())
-				cout<<"\nLinked list is empty\n";
+				cout<<endl<<"Linked list is empty"<<endl;
 			else if(n<=0)
 				cout<<"Invalid position";
 			else if(n==1)

@@ -33,7 +33,7 @@ class Stack
 		void view()
 		{
 			if(top==-1)
-				cout<<"Stack  is empty";
+				cout<<endl<<"Stack underflow"<<endl;
 			else
 			{
 				cout<<"Stack :"<<endl;
@@ -44,7 +44,7 @@ class Stack
 		void peek()
 		{
 			if(top==-1)
-				cout<<"Stack is empty";
+				cout<<endl<<"Stack underflow"<<endl;
 			else
 				cout<<endl<<"Top of stack = "<<a[top]<<endl;
 		}
@@ -79,4 +79,5 @@ int main()
 		cin>>c;
 		system("cls");
 	}while(c=='y' ||c=='Y');
+	return 0;
 }

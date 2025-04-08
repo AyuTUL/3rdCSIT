@@ -17,7 +17,7 @@ int main()
 	{
 		f1=F(x1);
 		f2=D(x1);
-		if(f1==0)
+		if(f2==0)
 			printf("Method can't continue because of divide by 0 error.");
 		else
 		{

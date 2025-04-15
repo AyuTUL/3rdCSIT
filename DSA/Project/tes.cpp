@@ -62,7 +62,6 @@ bool openFile(fstream &file, char* filename, ios::openmode mode) {
 
 enum TransportType {
     AIR,
-    TRAIN,
     BUS,
     CAR,
     OTHER
@@ -139,7 +138,6 @@ public:
     const char* getTypeString() const {
         switch(type) {
             case AIR: return "Air";
-            case TRAIN: return "Train";
             case BUS: return "Bus";
             case CAR: return "Car";
             
@@ -174,7 +172,7 @@ public:
         stayDuration = 0;
         attractionCount = 0;
         
-        for(int i = 0; i < MAX_ATTRACTIONS; i++) attractions[i] = nullptr;
+        for(int i = 0; i < MAX_ATTRACTIONS; i++) attractions[i] = NULL;
         
     }
 
@@ -186,7 +184,7 @@ public:
         
 
         for(int i = 0; i < MAX_ATTRACTIONS; i++)
-            attractions[i] = (i < attractionCount && other.attractions[i]) ? new Attraction(*other.attractions[i]) : nullptr;
+            attractions[i] = (i < attractionCount && other.attractions[i]) ? new Attraction(*other.attractions[i]) : NULL;
 }
 
     ~Destination() {
@@ -290,7 +288,6 @@ public:
     const char* getTypeString() const {
         switch(transportType) {
             case AIR: return "Air";
-            case TRAIN: return "Train";
             case BUS: return "Bus";
             case CAR: return "Car";
             case OTHER: return "Other";
@@ -626,7 +623,6 @@ public:
     const char* getTransportTypeName(TransportType type) {
         switch(type) {
             case AIR: return "Air";
-            case TRAIN: return "Train";
             case BUS: return "Bus";
             case CAR: return "Car";
           
@@ -848,11 +844,9 @@ public:
         
         cout << "Transportation Type:\n";
         cout << "1. Air\n";
-        cout << "2. Train\n";
-        cout << "3. Bus\n";
-        cout << "4. Car\n";
-        cout << "5. Ship\n";
-        cout << "6. Other\n";
+        cout << "2. Bus\n";
+        cout << "3. Car\n";
+        cout << "4. Other\n";
         cout << "Enter choice: ";
         cin >> transportChoice;
         cout << "Cost ($): ";
@@ -865,7 +859,6 @@ public:
         TransportType type;
         switch(transportChoice) {
             case 1: type = AIR; break;
-            case 2: type = TRAIN; break;
             case 3: type = BUS; break;
             case 4: type = CAR; break;
          
@@ -1039,7 +1032,7 @@ public:
 // Main function
 int main() {
     TripPlanner planner;
-    int choice;
+    int choice1,choice2;
     bool exit = false;
     char response;
     int x = 35, y = 4;
@@ -1051,84 +1044,135 @@ int main() {
         gotoxy(35, 4);
         dash();
         gotoxy(42, 6);
-        cout << "TRAVEL PLANNER MENU";
+        cout << "TOUR PLANNER MENU";
         gotoxy(35, 8);
         dash();
         gotoxy(40, 10);
-        cout << "1. Setup Traveller Profile";
+        cout << "1. Traveller Profile";
         gotoxy(40, 11);
-        cout << "2. View Traveller Profile";
+        cout << "2. Destination";
         gotoxy(40, 12);
-        cout << "3. Add Destination";
+        cout << "3. Route";
         gotoxy(40, 13);
-        cout << "4. View Destinations";
+        cout << "4. Budget Analysis";
         gotoxy(40, 14);
-        cout << "5. Add Route";
-        gotoxy(40, 15);
-        cout << "6. View Routes";
+        cout << "5. Exit";
         gotoxy(40, 16);
-        cout << "7. Find Best Route";
-        gotoxy(40, 17);
-        cout << "8. Budget Analysis";
-        gotoxy(40, 18);
-        cout << "9. Save Routes";
-        gotoxy(40, 19);
-        cout << "10. Load Routes";
-        gotoxy(40, 20);
-        cout << "11. Save Destinations";
-        gotoxy(40, 21);
-        cout << "12. Load Destinations";
-        gotoxy(40, 22);
-        cout << "13. Exit";
-        gotoxy(40, 24);
         cout << "Enter your choice: ";
-        cin >> choice;
-
-        switch(choice) {
+        cin >> choice1;
+        switch(choice1) {
+        	
             case 1:
-                planner.createProfile();
+            	system("cls");
+            	gotoxy(35, 4);
+		        dash();
+		        gotoxy(42, 6);
+		        cout << "Traveller Profile : Options";
+		        gotoxy(35, 8);
+		        dash();
+		        gotoxy(40, 10);
+		        cout << "1. Setup Traveller Profile";
+		        gotoxy(40, 11);
+		        cout << "2. View Traveller Profile";
+		        gotoxy(40, 13);
+		        cout << "Enter your choice: ";
+		        cin >> choice2;
+		        if(choice2==1)
+                	planner.createProfile();
+                else if(choice2==2)
+                	planner.viewProfile();
+                else
+                	cout<<"Invalid choice. Please try again."<<endl;
                 break;
             case 2:
-                planner.viewProfile();
+            	system("cls");
+                gotoxy(35, 4);
+		        dash();
+		        gotoxy(42, 6);
+		        cout<<"Destination : Options";
+		        gotoxy(35, 8);
+		        dash();
+		        gotoxy(40, 10);
+		        cout<<"1. Add Destination";
+		        gotoxy(40, 11);
+		        cout<<"2. View Destinations";
+		        gotoxy(40, 12);
+		        cout<<"3. Save Destinations";
+		        gotoxy(40, 13);
+		        cout<<"4. Load Destinations";
+		        gotoxy(40, 15);
+		        cout<<"Enter your choice: ";
+		        cin>>choice2;
+		        if(choice2==1)
+                	planner.addDestinationDetails();
+                else if(choice2==2)
+                	planner.displayDestinations();
+                else if(choice2==3)
+					planner.saveDestinations();
+                else if(choice2==4)
+                	planner.loadDestinations();
+                else
+                	cout<<"Invalid choice. Please try again."<<endl;
                 break;
             case 3:
-                planner.addDestinationDetails();
-                gotoxy(40, 22);
+            	system("cls");
+                gotoxy(35, 4);
+		        dash();
+		        gotoxy(42, 6);
+		        cout<<"Route : Options";
+		        gotoxy(35, 8);
+		        dash();
+		        gotoxy(40, 10);
+		        cout<<"1. Add Route";
+		        gotoxy(40, 11);
+		        cout<<"2. View Route";
+		        gotoxy(40, 12);
+		        cout<<"3. Save Routes";
+		        gotoxy(40, 13);
+		        cout<<"4. Load Routes";
+		        gotoxy(40, 15);
+		        cout<<"Enter your choice: ";
+		        cin>>choice2;
+		        if(choice2==1)
+                	planner.addRoute();
+                else if(choice2==2)
+                	planner.displayRoutes();
+                else if(choice2==3)
+					planner.saveRoutes();
+                else if(choice2==4)
+                	planner.loadRoutes();
+                else
+                	cout<<"Invalid choice. Please try again."<<endl;
                 break;
             case 4:
-                planner.displayDestinations();
+            	system("cls");
+                gotoxy(35, 4);
+		        dash();
+		        gotoxy(42, 6);
+		        cout<<"Budget Analysis : Options";
+		        gotoxy(35, 8);
+		        dash();
+		        gotoxy(40, 10);
+		        cout<<"1. Find Best Route";
+		        gotoxy(40, 11);
+		        cout<<"2. Budget Analysis";
+		        gotoxy(40, 12);
+		        cout<<"Enter your choice: ";
+		        cin>>choice2;
+		        if(choice2==1)
+                	planner.findBestRoute();
+                else if(choice2==2)
+					planner.budgetAnalysis();
+                else
+                	cout<<"Invalid choice. Please try again."<<endl;
                 break;
             case 5:
-                planner.addRoute();
-                break;
-            case 6:
-                planner.displayRoutes();
-                break;
-            case 7:
-                planner.findBestRoute();
-                break;
-            case 8:
-                planner.budgetAnalysis();
-                break;
-            case 9:
-                planner.saveRoutes();
-                break;
-            case 10:
-                planner.loadRoutes();
-                break;
-            case 11:
-            	planner.saveDestinations();
-            	break;
-            case 12:
-            	planner.loadDestinations();
-            	break;
-            case 13:
-                exit = true;
+            	system("cls");
+                exit=true;
                 break;
             default:
-                cout << "Invalid choice. Please try again.\n";
+                cout<<"Invalid choice. Please try again."<<endl;
         }
-
         if(!exit) {
             response = confirm("\nReturn to Main Menu? (y/n): ", posx, posy);
             if(tolower(response) != 'y') {

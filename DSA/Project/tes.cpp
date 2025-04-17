@@ -1,4 +1,5 @@
 #include<iostream>
+#include<iomanip>
 #include<fstream>
 #include<string.h>
 #include<stdlib.h>
@@ -256,7 +257,7 @@ void setName(const char* n) {
     }
 
     void displayDestination() {
-    	int x=2,y=*posy+1;
+    	int x=10,y=*posy+1;
         gotoxy(x,y+=2);
         cout<<"Destination : "<<name;
         gotoxy(x,++y);
@@ -267,12 +268,12 @@ void setName(const char* n) {
             for(int i=0;i<attractionCount;i++) {
             	Attraction* a=attractions[i];
             	if(a) {
-			        gotoxy(x+4,++y);
-			        cout<<i+1<<". Attraction Name : "<< a->getName();
-			        gotoxy(x+6,++y);
-			        cout<<"\tCost : Rs "<< a->getCost();
-			        gotoxy(x+6,++y);
-			        cout<<"\tTime Required : " <<a->getTimeRequired()<<" hrs";
+			        gotoxy(x+5,++y);
+			        cout<<i+1<<". Attraction : "<< a->getName();
+			        gotoxy(x+12,++y);
+			        cout<<"Cost : Rs "<< a->getCost();
+			        gotoxy(x+12,++y);
+			        cout<<"Time Required : " <<a->getTimeRequired()<<" hrs";
 			    }
         	} 
 		else
@@ -352,14 +353,14 @@ public:
     }
 
     void displayRoute() {
-    	int x=2,y=*posy+1;
+    	int x=10,y=*posy+1;
         gotoxy(x,y+=2);
         cout<<" Route : "<<from<<" -> "<<to;
-        gotoxy(x,++y);
+        gotoxy(x+3,++y);
         cout<<"\tTransport Type : "<<getTypeString();
-        gotoxy(x,++y);
+        gotoxy(x+3,++y);
         cout<<"\tCost : Rs "<<cost;
-        gotoxy(x,++y);
+        gotoxy(x+3,++y);
         cout<<"\tTravel Time : "<<time/60<<" hrs "<<time%60<<" min";
 		gotoxy(x,++y);
 		dash();
@@ -478,7 +479,7 @@ public:
         else
         {
         	for(int i=0;i<routeCount;i++) {
-            	cout<<i+1<<". ";
+            	cout<<"\t"<<i+1<<". ";
             	routes[i].displayRoute();
 			}
 		}
@@ -656,34 +657,51 @@ public:
 		}
 	}
     void dfsAllPaths(int current, int end, bool visited[], int path[], int pathIndex, double currentCost, int currentTime) {
-    visited[current] = true;
-    path[pathIndex] = current;
-    pathIndex++;
-
-    if (current == end) {
-        cout << "\nRoute: ";
-        for (int i = 0; i < pathIndex; i++) {
-            cout << locations[path[i]];
-            if (i < pathIndex - 1) cout << " -> ";
+    	int x=10;
+		visited[current] = true;
+    	path[pathIndex] = current;
+    	pathIndex++;
+    	if(current==end) {
+    		(*posy)+=1;
+        	int y = *posy;
+    		gotoxy(x,++y);
+        	cout<<"Path : ";
+        	for(int i=0;i<pathIndex;i++) {
+            	cout<<locations[path[i]];
+            	if(i<pathIndex-1) cout<<" -> ";
+        	}
+        	gotoxy(x+3,++y);
+        	cout<<"Total Cost : Rs "<<currentCost;
+        	gotoxy(x+3,++y);
+        	cout<<"Total Time : "<<currentTime/60<< " hrs "<<currentTime%60<<" min";
+			gotoxy(x+3,++y);
+        	cout<<"Routes : ";
+        	gotoxy(x,++y);
+        	cout << "+------------------+------------------+----------+-------------+-----------+";
+        	gotoxy(x,++y);
+        	cout << "| From             | To               | Cost     | Transport   | Time      |";
+        	gotoxy(x,++y);
+        	cout << "+------------------+------------------+----------+-------------+-----------+";
+        
+        	for (int i = 0; i < pathIndex - 1; i++) {
+            	int u = path[i];
+            	int v = path[i + 1];
+            	gotoxy(x,++y);
+            	cout << "| " << left << setw(16) << locations[u] << " | " 
+                 << left << setw(16) << locations[v] << " | $" 
+                 << right << setw(7) << costMatrix[u][v] << " | " 
+                 << left << setw(11) << getTransportTypeName(transportMatrix[u][v]) << " | " 
+                 << right << setw(2) << timeMatrix[u][v] / 60 << " h " 
+                 << right << setw(2) << timeMatrix[u][v] % 60 << " m |";
         }
-        cout << "\n  Total Cost: $" << currentCost;
-        cout << "\n  Total Time: " << currentTime / 60 << "h " << currentTime % 60 << "m\n";
-
-        cout << "  Segments:\n";
-        for (int i = 0; i < pathIndex - 1; i++) {
-            int u = path[i];
-            int v = path[i + 1];
-            cout << "    " << locations[u] << " -> " << locations[v];
-            cout << " | $" << costMatrix[u][v];
-            cout << " | " << getTransportTypeName(transportMatrix[u][v]);
-            cout << " | " << timeMatrix[u][v] / 60 << "h " << timeMatrix[u][v] % 60 << "m\n";
-        }
+        gotoxy(x,++y);
+        cout << "+------------------+------------------+----------+-------------+-----------+";
+    	(*posy)=++y;
     } else {
+    	
         for (int i = 0; i < locationCount; i++) {
             if (!visited[i] && costMatrix[current][i] != INF) {
-                dfsAllPaths(i, end, visited, path, pathIndex,
-                            currentCost + costMatrix[current][i],
-                            currentTime + timeMatrix[current][i]);
+                dfsAllPaths(i, end, visited, path, pathIndex,currentCost + costMatrix[current][i],currentTime + timeMatrix[current][i]);
             }
         }
     }
@@ -692,22 +710,32 @@ public:
     pathIndex--;
 }
 
-void findAllRoutesWithCost(const char* start, const char* end) {
-    int startIndex = findLocationIndex(start);
-    int endIndex = findLocationIndex(end);
-
-    if (startIndex == -1 || endIndex == -1) {
-        cout << "Invalid locations.\n";
-        return;
-    }
-
-    bool visited[MAX_DESTINATIONS] = {false};
-    int path[MAX_DESTINATIONS];
-    int pathIndex = 0;
-
-    cout << "\n=== All Routes from " << start << " to " << end << " ===\n";
-    dfsAllPaths(startIndex, endIndex, visited, path, pathIndex, 0.0, 0);
-}
+	void findAllRoutesWithCost(const char* start,const char* end) {
+    	int startIndex = findLocationIndex(start),endIndex = findLocationIndex(end),x=35,y=0;
+        system("cls");
+    	gotoxy(x,y);
+        dash();
+        gotoxy(42,y+=3);
+        cout<<"Budget Analysis : All Paths";
+        gotoxy(x,++y);
+        dash();
+    	if (startIndex == -1 || endIndex == -1) {
+    		gotoxy(x,y+=2);
+        	cout<<"Invalid locations.";
+    	}
+    	else
+    	{
+    		bool visited[MAX_DESTINATIONS]={false};
+    		int path[MAX_DESTINATIONS],pathIndex=0;
+    		gotoxy(10,y+=3);
+    		cout<<"All Paths from "<<start<<" to "<<end<<" :";
+    		(*posy)=++y;
+    		dfsAllPaths(startIndex,endIndex,visited,path,pathIndex,0.0,0);
+		}
+		gotoxy(x,*posy);
+			dash();
+		(*posy)+=3;
+	}
 };
 
 
@@ -790,7 +818,7 @@ public:
 	        gotoxy(x,++y);
 	        cout<<"Planned Days : "<<plannedDays;
 	    } else {
-	        gotoxy(x,y+=2);
+	        gotoxy(x,y+=3);
 	        cout<<"No profile found. Please set up a profile first.";
 	    }
 	    (*posx)=40;
@@ -1074,10 +1102,9 @@ public:
         double totalBudget=traveller.getBudget();
         if(totalBudget==0)
         {
-        	gotoxy(x,y+=2);
+        	gotoxy(x,y+=3);
         	cout<<"Please set up your traveller profile first.";
 		}
-            
         else
         {
         	double totalCost=0;
@@ -1101,7 +1128,7 @@ public:
 	        cin.getline(start, sizeof(start));
 	        cout<<"\t\tEnter destination : ";
 	        cin.getline(end, sizeof(end));
-	        routeGraph.findAllRoutesWithCost(start, end);
+	        routeGraph.findAllRoutesWithCost(start,end);
 		}
     }
 
@@ -1325,7 +1352,11 @@ int main() {
                 exit=true;
         }
     }
-    gotoxy(40,24);
-    cout<<"Thank you for using Travel Planner!\n";
+    gotoxy(0,4);
+	dash();
+	gotoxy(42,7);
+	cout<<"Thank you for using Tour Planner!";
+	gotoxy(0,8);
+	dash();
     return 0;
 }

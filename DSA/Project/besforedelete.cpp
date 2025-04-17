@@ -2,6 +2,7 @@
 #include<iomanip>
 #include<fstream>
 #include<string.h>
+#include<stdlib.h>
 #include<windows.h>
 using namespace std;
 
@@ -42,14 +43,12 @@ void gotoxy(int x, int y) {
 	}
 }
 
-void drawHeader(const char* title,int& x,int& y) {
-    system("cls");
-	gotoxy(x,y);
-    dash();
-    gotoxy(x,y+=3);
-    cout << title;
-    gotoxy(x, ++y);
-    dash();
+char confirm(char s[],int *x,int *y) {
+    char c;    
+    gotoxy(*x,*y);
+    cout<<s;
+    cin>>c;
+    return(c);
 }
 
 template<typename T>
@@ -831,298 +830,380 @@ public:
     const char* getName() const { return name; }
     
 };
+
+
+// TripPlanner class
 class TripPlanner {
-	private:
-	    Destination destinations[MAX_DESTINATIONS];
-	    int destinationCount;
-	    RouteGraph routeGraph;
-	    TravellerProfile traveller;
-	public:
-	    TripPlanner() {
-	        destinationCount = 0;
-	    }
-	    void saveDestinations() {
-	    	char filename[100];
-	    	int x,y;
-	        drawHeader("Destinations : Save",x=45,y=4);
-	        gotoxy(x=35,y+=3);
-			cout<<"Enter filename to save destinations : ";
-			cin>>filename;
-	    	DestinationData dd;
-	    	dd.count=destinationCount;
-		    for (int i=0;i<destinationCount;++i) {
-		        Destination& d=destinations[i];
-		        DestinationRawData& raw=dd.data[i];
-		        strcpy(raw.name,d.getName());
-		        raw.stayDuration=d.getStayDuration();
-		        raw.attractionCount=d.getAttractionCount();
-		        for(int j=0;j<raw.attractionCount;++j) {
-		            Attraction* a=d.getAttraction(j);
-		            if(a) {
-		                strcpy(raw.attractions[j].name,a->getName());
-		                raw.attractions[j].cost=a->getCost();
-		                raw.attractions[j].timeRequired=a->getTimeRequired();
-		            }
-		        }
-		    }
-			gotoxy(x,y+=2);
-		    if(::saveToFile(dd,filename))
-		        cout<<"Destinations saved to "<<filename<<" successfully!";
-		    else
-		        cout<<"Failed to save destinations.";
-		    (*posy)=y+=3;
-		}
-	    void loadDestinations() {
-	    	char filename[100];
-	    	int x,y;
-	        drawHeader("Destinations : Load",x=45,y=4);
-	        gotoxy(x=30,y+=3);
-			cout<<"Enter filename to load destinations from : ";
-			cin>>filename;
-	        DestinationData dd;
-	        (*posx)=x;
-			(*posy)=y+=2;
-		    if (!::loadFromFile(dd,filename))
-		    {
-		    	gotoxy(x,y+=2);
-		    	cout<<"Failed to load destinations.";
-			} 
-			else
-			{
-				destinationCount=dd.count;
-			    for (int i=0;i<destinationCount;++i) {
-			        DestinationRawData& raw=dd.data[i];
-			        Destination d;
-			        d.setName(raw.name);
-			        d.setStayDuration(raw.stayDuration);
-			        for (int j=0;j<raw.attractionCount;++j) {
-			            AttractionData& a=raw.attractions[j];
-			            Attraction* attraction=new Attraction(a.name, a.cost, a.timeRequired);
-			            d.addAttraction(attraction);
-			        }
-			        destinations[i]=d;
-			        routeGraph.addLocation(d.getName());
-			    }
-				gotoxy(x,y);
-			    cout<<"Destinations loaded successfully from "<<filename;
-			}
-			(*posx)=x+=10;
-	    	(*posy)=y+=3;
-		}
-	    void addDestination(const Destination& dest) {
-	        if(destinationCount<MAX_DESTINATIONS)
-	            destinations[destinationCount++]=dest;
-	        else
-	            cout<<"Maximum destinations reached.";
-	    }
-	    void createProfile() {
-	        traveller.setProfile();
-	    }
-	    void viewProfile() {
-	        traveller.viewProfile();
-	    }
-	    void addRoute() {
-	        char from[50],to[50];
-	        double cost;
-	        int time,transportChoice;
-	        int x,y;
-	        drawHeader("Routes : Add",x=45,y=0);
-	        (*posx)=x-3;
-	        (*posy)=y;
-	        routeGraph.displayLocations();
-	        x=(*posx);
-	        y=(*posy);
-	        gotoxy(x,++y);
-	        cout<<"Enter new route details :";
-	        gotoxy(x,++y);
-	        cout<<"Enter source name : ";
-	        cin.ignore();
-	        cin.getline(from,sizeof(from));
-	        gotoxy(x,++y);
-	        cout<<"Enter destination name : ";
-	        cin.getline(to,sizeof(to));
-	        gotoxy(x,y+=2);
-	        cout<<"Transportation Type :";
-	        gotoxy(x,++y);
-	        cout<<"1. Air";
-	        gotoxy(x,++y);
-	        cout<<"2. Bus";
-	        gotoxy(x,++y);
-	        cout<<"3. Car";
-	        gotoxy(x,++y);
-	        cout<<"4. Other";
-	        gotoxy(x,++y);
-	        cout<<"Enter choice : ";
-			cin>>transportChoice;
-			gotoxy(x,y+=2);
-			cout<<"Cost (Rs) : ";
-	        cin>>cost;
-	        gotoxy(x,++y);
-	        cout<<"Time (in minutes) : ";
-	        cin>>time;
-	        TransportType type;
-	        switch(transportChoice) {
-	            case 1: type=AIR; break;
-	            case 2: type=BUS; break;
-	            case 3: type=CAR; break;
-	         	case 4: type=OTHER; break;
-	            default: type=OTHER;
+private:
+    Destination destinations[MAX_DESTINATIONS];
+    int destinationCount;
+    RouteGraph routeGraph;
+    TravellerProfile traveller;
+    
+public:
+    TripPlanner() {
+        destinationCount = 0;
+    }
+    
+    void saveDestinations() {
+    	char filename[100];
+    	int x=35,y=4;
+        system("cls");
+    	gotoxy(x,y);
+        dash();
+        gotoxy(42,y+=3);
+        cout<<"Destinations : Save";
+        gotoxy(x,++y);
+        dash();
+        gotoxy(x,y+=3);
+		cout<<"Enter filename to save destinations : ";
+		cin>>filename;
+    	DestinationData dd;
+    	dd.count=destinationCount;
+	    for (int i = 0; i < destinationCount; ++i) {
+	        Destination& d = destinations[i];
+	        DestinationRawData& raw = dd.data[i];
+	
+	        strcpy(raw.name, d.getName());
+	        raw.stayDuration = d.getStayDuration();
+	        raw.attractionCount = d.getAttractionCount();
+	
+	        for (int j = 0; j < raw.attractionCount; ++j) {
+	            Attraction* a = d.getAttraction(j);
+	            if (a) {
+	                strcpy(raw.attractions[j].name, a->getName());
+	                raw.attractions[j].cost = a->getCost();
+	                raw.attractions[j].timeRequired = a->getTimeRequired();
+	            }
 	        }
-	        routeGraph.addRoute(from,to,cost,time,type);
-	        gotoxy(x,y+=2);
-	        cout<<"Route added successfully.";
-	        (*posy)=y+=3;
 	    }
-	    void displayRoutes() {
-	    	int x,y;
-	        drawHeader("Routes : View",x=35,y=0);
-	        (*posy)=y;
-	        routeGraph.displayRoutes();
+		gotoxy(x,y+=2);
+	    if (::saveToFile(dd,filename)) {
+	        cout << "Destinations saved to " << filename << " successfully!";
+	    } else {
+	        cout << "Failed to save destinations.";
 	    }
-	    void findBestRoute() {
-	        char from[50],to[50];
-	        int preference,x,y;
-	        drawHeader("Budget Analysis : For Best Path",x=45,y=0);
-	        (*posy)=y;
-	        routeGraph.displayLocations();
-	        y=*posy;
-			gotoxy(x,++y);
-			cout<<"Enter source : ";
-	        cin.ignore();
-	        cin.getline(from,sizeof(from));
-	        gotoxy(x,++y);
-	        cout<<"Enter destination : ";
-	        cin.getline(to,sizeof(to));
-	        gotoxy(x,y+=2);
-	        cout<<"Optimization preference :";
-	        gotoxy(x,++y);
-	        cout<<"1. Optimize for cost";
-	        gotoxy(x,++y);
-	        cout<<"2. Optimize for time";
-	        gotoxy(x,++y);
-	        cout<<"Enter your choice : ";
-	        cin>>preference;
-	        bool optimizeForCost=(preference==1);
-	        routeGraph.findShortestPath(from,to,optimizeForCost);
-			(*posy)+=3;    
-		}
-	    void saveRoutes() {
-	    	char filename[100];
-	    	int x,y;
-	        drawHeader("Routes : Save",x=45,y=4);
-	        gotoxy(x=35,y+=3);
-			cout<<"Enter filename to save routes : ";
-			cin>>filename;
-			(*posx)=x+5;
-			(*posy)=y;
-	    	routeGraph.saveToFile(filename);
-			(*posx)=x;
-			(*posy)=y+5;
-	    }
-	  	void loadRoutes() {
-	  		char filename[100];
-	    	int x,y;
-	        drawHeader("Routes : Load",x=45,y=4);
-	        gotoxy(x=30,y+=3);
-			cout<<"Enter filename to load routes from : ";
-			cin>>filename;
-	    	routeGraph.loadFromFile(filename);
-			(*posy)+=3;
+	    (*posy)=y+=3;
+	}
+
+    void loadDestinations() {
+    	char filename[100];
+    	int x=30,y=4;
+        system("cls");
+    	gotoxy(x,y);
+        dash();
+        gotoxy(42,y+=3);
+        cout<<"Destinations : Load";
+        gotoxy(x,++y);
+        dash();
+        gotoxy(x,y+=3);
+		cout<<"Enter filename to load destinations from : ";
+		cin>>filename;
+        DestinationData dd;
+        (*posx)=x;
+		(*posy)=y+=2;
+	    if (!::loadFromFile(dd, filename))
+	    {
+	    	gotoxy(x,y+=2);
+	    	cout<<"Failed to load destinations.";
 		} 
-	    void budgetAnalysis() {
-	        int x,y;
-	        drawHeader("Budget Analysis : All Paths",x=45,y=4);
-	        double totalBudget=traveller.getBudget();
-	        if(totalBudget==0)
-	        {
-	        	gotoxy(x=44,y+=3);
-	        	cout<<"Please set up your traveller profile first.";
-			}
-	        else
-	        {
-	        	double totalCost=0;
-		        double attractionCost=0;
-		        for(int i=0;i<destinationCount;i++) {
-		            double destCost=destinations[i].calculateTotalCost();
-		            attractionCost+=destCost;
-		            totalCost+=destCost;
+		else
+		{
+			destinationCount = dd.count;
+		    for (int i = 0; i < destinationCount; ++i) {
+		        DestinationRawData& raw = dd.data[i];
+		        Destination d;
+		        d.setName(raw.name);
+		        d.setStayDuration(raw.stayDuration);
+		
+		        for (int j = 0; j < raw.attractionCount; ++j) {
+		            AttractionData& a = raw.attractions[j];
+		            Attraction* attraction = new Attraction(a.name, a.cost, a.timeRequired);
+		            d.addAttraction(attraction);
 		        }
-		        cout<<"\tTotal Budget : Rs "<<totalBudget<<endl;
-		        cout<<"\tEstimated Total Cost : Rs "<<totalCost<<endl;
-		        if(totalCost>totalBudget)
-		            cout<<"\tBudget Deficit : Rs "<<totalCost-totalBudget<<endl<<"\tWarning: Your current plan exceeds your budget."<<endl;
-		        else
-		            cout<<"\tBudget Surplus: Rs "<<totalBudget-totalCost<<endl<<"\tGood news! Your plan is within budget."<<endl;
-		        cout<<endl<<"\tCost Breakdown for All Paths :"<<endl;
-		        cout<<"\t\tTotal cost for visiting all attractions : Rs "<<attractionCost<<endl;
-		        char start[50],end[50];
-		        cout<<endl<<"\t\tEnter source : ";
-		        cin.ignore();
-		        cin.getline(start, sizeof(start));
-		        cout<<"\t\tEnter destination : ";
-		        cin.getline(end, sizeof(end));
-		        routeGraph.findAllRoutesWithCost(start,end);
-			}
-	    }
-	    void addDestinationDetails() {
-	        char name[50];
-	        int days,x,y;
-	        drawHeader("Destinations : Add",x=45,y=4);
-	        gotoxy(x=44,y+=3);
-	        cout<<"Enter destination name : ";
-	        cin.ignore();
-	        cin.getline(name,sizeof(name));
-	        gotoxy(x,++y);
-	        cout<<"Enter stay duration (days) : ";
-	        cin>>days;
-	        Destination newDest;
-	        newDest.setName(name);
-	        newDest.setStayDuration(days);
-	        char addMore;
-	        do {
-	            char attractionName[50];
-	            double cost;
-	            int time;
-	            cin.ignore();
-	            gotoxy(x,y+=2);
-	            cout<<"Enter attraction name : ";
-	            cin.getline(attractionName,sizeof(attractionName));
-	            gotoxy(x,++y);
-	            cout<<"Enter cost (Rs) : ";
-	            cin>>cost;
-	            gotoxy(x,++y);
-	            cout<<"Enter time required (hours) : ";
-	            cin>>time;
-	            Attraction* attraction=NULL;
-	            attraction=new Attraction(attractionName,cost,time);
-	            if(attraction)
-	                newDest.addAttraction(attraction);
-	            gotoxy(x,++y);
-	            cout<<"Add another attraction? [Y/N] : ";
-	            cin>>addMore;
-	        } while(toupper(addMore)=='Y');
-	        addDestination(newDest);
-	        gotoxy(x,y+=2);
-	        cout<<"Destination added successfully!";
-	        routeGraph.addLocation(name);
-	   		(*posy)=y+=3; 
+		
+		        destinations[i] = d;
+		        routeGraph.addLocation(d.getName());
+		    }
+			gotoxy(x,y);
+		    cout << "Destinations loaded successfully from " << filename;
 		}
-	    void displayDestinations() {
-	        int x,y;
-	        drawHeader("Destinations : View",x=45,y=0);
-	        if(destinationCount==0) {
-	        	gotoxy(x=44,y+=3);
-	        	(*posy)=y;
-	        	cout<<"No destinations added yet!";
-			}   
-	        else {
-	        	(*posy)=y;
-	        	for(int i=0;i<destinationCount;i++)
-		        	destinations[i].displayDestination();
-			}
-	        (*posy)+=3; 
-	    }
+		(*posx)=x+=10;
+    	(*posy)=y+=3;
+	}
+    
+    void addDestination(const Destination& dest) {
+        if(destinationCount < MAX_DESTINATIONS) {
+            destinations[destinationCount++] = dest;
+        } else {
+            cout << "Maximum destinations reached!\n";
+        }
+    }
+    
+    void createProfile() {
+        traveller.setProfile();
+    }
+    
+    void viewProfile() {
+        traveller.viewProfile();
+    }
+    
+    void addRoute() {
+        char from[50],to[50];
+        double cost;
+        int time,transportChoice;
+        int days,x=35,y=0;
+        system("cls");
+    	gotoxy(x,y);
+        dash();
+        gotoxy(42,y+=3);
+        cout<<"Routes : Add";
+        gotoxy(x,++y);
+        dash();
+        (*posx)=x;
+        (*posy)=y;
+        routeGraph.displayLocations();
+        x=(*posx);
+        y=(*posy);
+        gotoxy(x,++y);
+        cout<<"Enter new route details :";
+        gotoxy(x,++y);
+        cout<<"Enter source name : ";
+        cin.ignore();
+        cin.getline(from,sizeof(from));
+        gotoxy(x,++y);
+        cout<<"Enter destination name : ";
+        cin.getline(to,sizeof(to));
+        gotoxy(x,y+=2);
+        cout<<"Transportation Type :";
+        gotoxy(x,++y);
+        cout<<"1. Air";
+        gotoxy(x,++y);
+        cout<<"2. Bus";
+        gotoxy(x,++y);
+        cout<<"3. Car";
+        gotoxy(x,++y);
+        cout<<"4. Other";
+        gotoxy(x,++y);
+        cout<<"Enter choice : ";
+		cin>>transportChoice;
+		gotoxy(x,y+=2);
+		cout<<"Cost (Rs) : ";
+        cin>>cost;
+        gotoxy(x,++y);
+        cout<<"Time (in minutes) : ";
+        cin>>time;
+        TransportType type;
+        switch(transportChoice) {
+            case 1: type=AIR; break;
+            case 2: type=BUS; break;
+            case 3: type=CAR; break;
+         	case 4: type=OTHER; break;
+            default: type=OTHER;
+        }
+        routeGraph.addRoute(from,to,cost,time,type);
+        gotoxy(x,y+=2);
+        cout<<"Route added successfully.";
+        (*posy)=y+=3;
+    }
+    
+    void displayRoutes() {
+        int x=35,y=0;
+        system("cls");
+    	gotoxy(x,y);
+        dash();
+        gotoxy(42,y+=3);
+        cout<<"Routes : View";
+        gotoxy(x,++y);
+        dash();
+        (*posy)=y;
+        routeGraph.displayRoutes();
+    }
+    
+    void findBestRoute() {
+        char from[50],to[50];
+        int preference,x=35,y=0;
+        system("cls");
+    	gotoxy(x,y);
+        dash();
+        gotoxy(42,y+=3);
+        cout<<"Budget Analysis : For Best Path";
+        gotoxy(x,++y);
+        dash();
+        (*posy)=y;
+        routeGraph.displayLocations();
+        y=*posy;
+		gotoxy(x,++y);
+		cout<<"Enter source : ";
+        cin.ignore();
+        cin.getline(from,sizeof(from));
+        gotoxy(x,++y);
+        cout<<"Enter destination : ";
+        cin.getline(to,sizeof(to));
+        gotoxy(x,y+=2);
+        cout<<"Optimization preference :";
+        gotoxy(x,++y);
+        cout<<"1. Optimize for cost";
+        gotoxy(x,++y);
+        cout<<"2. Optimize for time";
+        gotoxy(x,++y);
+        cout<<"Enter your choice : ";
+        cin>>preference;
+        bool optimizeForCost=(preference==1);
+        routeGraph.findShortestPath(from,to,optimizeForCost);
+		(*posy)+=3;    
+	}
+    void saveRoutes() {
+    	char filename[100];
+    	int x=35,y=4;
+        system("cls");
+    	gotoxy(x,y);
+        dash();
+        gotoxy(42,y+=3);
+        cout<<"Routes : Save";
+        gotoxy(x,++y);
+        dash();
+        gotoxy(x,y+=3);
+		cout<<"Enter filename to save routes : ";
+		cin>>filename;
+		(*posy)=y;
+    	routeGraph.saveToFile(filename);
+		(*posx)=x;
+		(*posy)=y+5;
+    }
+    
+  	void loadRoutes() {
+  		char filename[100];
+    	int x=30,y=4;
+        system("cls");
+    	gotoxy(x,y);
+        dash();
+        gotoxy(42,y+=3);
+        cout<<"Routes : Load";
+        gotoxy(x,++y);
+        dash();
+        gotoxy(x,y+=3);
+		cout<<"Enter filename to load routes from : ";
+		cin>>filename;
+    	routeGraph.loadFromFile(filename);
+		(*posy)+=3;
+}
+   
+    
+    void budgetAnalysis() {
+        int x=35,y=0;
+        system("cls");
+    	gotoxy(x,y);
+        dash();
+        gotoxy(42,y+=3);
+        cout<<"Budget Analysis : All Paths";
+        gotoxy(x,++y);
+        dash();
+        double totalBudget=traveller.getBudget();
+        if(totalBudget==0)
+        {
+        	gotoxy(x,y+=3);
+        	cout<<"Please set up your traveller profile first.";
+		}
+        else
+        {
+        	double totalCost=0;
+	        double attractionCost=0;
+	        for(int i=0;i<destinationCount;i++) {
+	            double destCost=destinations[i].calculateTotalCost();
+	            attractionCost+=destCost;
+	            totalCost+=destCost;
+	        }
+	        cout<<"\tTotal Budget : Rs "<<totalBudget<<endl;
+	        cout<<"\tEstimated Total Cost : Rs "<<totalCost<<endl;
+	        if(totalCost>totalBudget)
+	            cout<<"\tBudget Deficit : Rs "<<totalCost-totalBudget<<endl<<"\tWarning: Your current plan exceeds your budget."<<endl;
+	        else
+	            cout<<"\tBudget Surplus: Rs "<<totalBudget-totalCost<<endl<<"\tGood news! Your plan is within budget."<<endl;
+	        cout<<endl<<"\tCost Breakdown for All Paths :"<<endl;
+	        cout<<"\t\tTotal cost for visiting all attractions : Rs "<<attractionCost<<endl;
+	        char start[50],end[50];
+	        cout<<endl<<"\t\tEnter source : ";
+	        cin.ignore();
+	        cin.getline(start, sizeof(start));
+	        cout<<"\t\tEnter destination : ";
+	        cin.getline(end, sizeof(end));
+	        routeGraph.findAllRoutesWithCost(start,end);
+		}
+    }
+
+    void addDestinationDetails() {
+        char name[50];
+        int days,x=35,y=0;
+        system("cls");
+    	gotoxy(x,y);
+        dash();
+        gotoxy(42,y+=3);
+        cout<<"Destinations : Add";
+        gotoxy(x,++y);
+        dash();
+        gotoxy(x+=5,y+=3);
+        cout<<"Enter destination name : ";
+        cin.ignore();
+        cin.getline(name,sizeof(name));
+        gotoxy(x,++y);
+        cout<<"Enter stay duration (days) : ";
+        cin>>days;
+        Destination newDest;
+        newDest.setName(name);
+        newDest.setStayDuration(days);
+        char addMore;
+        do {
+            char attractionName[50];
+            double cost;
+            int time;
+            cin.ignore();
+            gotoxy(x,y+=2);
+            cout<<"Enter attraction name : ";
+            cin.getline(attractionName,sizeof(attractionName));
+            gotoxy(x,++y);
+            cout<<"Enter cost (Rs) : ";
+            cin>>cost;
+            gotoxy(x,++y);
+            cout<<"Enter time required (hours) : ";
+            cin>>time;
+            Attraction* attraction=NULL;
+            attraction=new Attraction(attractionName,cost,time);
+            if(attraction)
+                newDest.addAttraction(attraction);
+            gotoxy(x,++y);
+            cout<<"Add another attraction? [Y/N] : ";
+            cin>>addMore;
+        } while(toupper(addMore)=='Y');
+        addDestination(newDest);
+        gotoxy(x,y+=2);
+        cout<<"Destination added successfully!";
+        routeGraph.addLocation(name);
+   		(*posy)=y+=3; 
+	}
+     
+    void displayDestinations() {
+        int x=35,y=0;
+        system("cls");
+    	gotoxy(x,y);
+        dash();
+        gotoxy(42,y+=3);
+        cout<<"Destinations : View";
+        gotoxy(x,++y);
+        dash();
+        (*posy)=y;
+        if(destinationCount==0)
+        {
+        	gotoxy(x+=5,y+=3);
+        	cout<<"No destinations added yet!";
+		}   
+        else
+	        for(int i=0;i<destinationCount;i++)
+	        	destinations[i].displayDestination();
+        (*posy)+=3; 
+    }
 };
+
 int main() {
     TripPlanner planner;
     int choice1,choice2;
@@ -1132,8 +1213,15 @@ int main() {
     posx=&x;
     posy=&y;
     while(!exit) {
-        drawHeader("TOUR PLANNER MENU",x=45,y=4);
-        gotoxy(x=44,y+=3);
+        system("cls");
+        x=35,y=4;
+        gotoxy(x,y);
+        dash();
+        gotoxy(42,y+=3);
+        cout<<"TOUR PLANNER MENU";
+        gotoxy(x,++y);
+        dash();
+        gotoxy(x+=5,y+=3);
         cout<<"1. Traveller Profile";
         gotoxy(x,++y);
         cout<<"2. Destination";
@@ -1148,8 +1236,14 @@ int main() {
         cin>>choice1;
         switch(choice1) {
             case 1:
-            	drawHeader("Traveller Profile : Options",x=45,y=4);
-		        gotoxy(x=44,y+=3);
+            	system("cls");
+            	gotoxy(x=35,y=4);
+		        dash();
+		        gotoxy(42,y+=3);
+		        cout<<"Traveller Profile : Options";
+		        gotoxy(x,++y);
+		        dash();
+		        gotoxy(x+=5,y+=3);
 		        cout<<"1. Setup Traveller Profile";
 		        gotoxy(x,++y);
 		        cout<<"2. View Traveller Profile";
@@ -1164,8 +1258,14 @@ int main() {
                 	cout<<"Invalid choice. Please try again."<<endl;
                 break;
             case 2:
-            	drawHeader("Destinations : Options",x=45,y=4);
-		        gotoxy(x=44,y+=3);
+            	system("cls");
+            	gotoxy(x=35,y=4);
+		        dash();
+		        gotoxy(42,y+=3);
+		        cout<<"Destinations : Options";
+		        gotoxy(x,++y);
+		        dash();
+		        gotoxy(x+=5,y+=3);
 		        cout<<"1. Add Destination";
 		        gotoxy(x,++y);
 		        cout<<"2. View Destinations";
@@ -1188,8 +1288,14 @@ int main() {
                 	cout<<"Invalid choice. Please try again."<<endl;
                 break;
             case 3:
-            	drawHeader("Routes : Options",x=45,y=4);
-		        gotoxy(x=44,y+=3);
+            	system("cls");
+            	gotoxy(x=35,y=4);
+		        dash();
+		        gotoxy(42,y+=3);
+		        cout<<"Routes : Options";
+		        gotoxy(x,++y);
+		        dash();
+		        gotoxy(x+=5,y+=3);
 		        cout<<"1. Add Routes";
 		        gotoxy(x,++y);
 		        cout<<"2. View Routes";
@@ -1212,8 +1318,14 @@ int main() {
                 	cout<<"Invalid choice. Please try again."<<endl;
                 break;
             case 4:
-            	drawHeader("Budget Analysis : Options",x=45,y=4);
-		        gotoxy(x=44,y+=3);
+            	system("cls");
+            	gotoxy(x=35,y=4);
+		        dash();
+		        gotoxy(42,y+=3);
+		        cout<<"Budget Analysis : Options";
+		        gotoxy(x,++y);
+		        dash();
+		        gotoxy(x+=5,y+=3);
 		        cout<<"1. For Best Path";
 		        gotoxy(x,++y);
 		        cout<<"2. For All Paths";
@@ -1242,6 +1354,12 @@ int main() {
                 exit=true;
         }
     }
-    drawHeader("Thank you for using Tour Planner",x=40,y=4);
+    system("cls");
+    gotoxy(0,4);
+	dash();
+	gotoxy(42,7);
+	cout<<"Thank you for using Tour Planner!";
+	gotoxy(0,8);
+	dash();
     return 0;
 }

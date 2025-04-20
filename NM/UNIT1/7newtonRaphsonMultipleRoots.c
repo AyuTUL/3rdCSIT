@@ -8,7 +8,7 @@ float F(float x,int n)
     float res=0;
     int i;
     for(i=n;i>=0;i--)
-        res+=a[i]*pow(x, i);
+        res+=a[i]*pow(x,i);
     return res;
 }
 float FD(float x,int n)
@@ -30,7 +30,7 @@ int  main()
 		scanf("%f",&a[i]);
 	printf("Enter initial guess : ");
 	scanf("%f",&x0);
-	printf("\nRoots of polynomial ");
+	printf("\nRoots of polynomial : ");
 	for(i=n;i>=0;i--)
 		printf(" %+gx^%d ",a[i],i);
 	while(n>1)

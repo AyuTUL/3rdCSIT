@@ -1,0 +1,10 @@
+ASMT:
+SET A
+
+1. Explain the purpose of applying multiple linear analysis?
+to understand the relationship between 1 dependent y and 2/more independent x variables
+-prediction: predict value of y based on known values of x eg house price based on size age
+-relationship: how much each x contributes to y eg: how much advertising budget rating affect sales
+-control for confounding variables: isolate effect of each x controlling influence of others
+-testing hypothesis: theorize how variables are related
+-modling real world situations: real world outcoems are raely influenced by just one factor, realistic accurate

@@ -4,8 +4,7 @@
 #define MAX 30
 int main()
 {
-	int a[MAX],b[MAX];
-	int i,m,n,c,r;
+	int a[MAX],b[MAX],i,m,n,c,r;
 	printf("Enter degree  of polynomial : ");
 	scanf("%d",&n);
 	printf("Enter coefficients of dividend polynomial of order %d (a%d - a0) : ",n,n);

@@ -173,4 +173,24 @@ delete that vertex
 -repeat until queue is empty
 -final spanning tree is produced by removing unused edges from graph
 
+TOH:
+mathematical puzzle consistting to 3 towers and more than one disk
+3 poels are source intermediate destination
+transfer all disk from source to desitnation poles using intermediate
+pole for temporary storage on follwing conditions:
+-only 1 disk may be moved at a time
+-each move consists of moving upper disk from one pole to top of another
+-on smaller disk can be placed on top of larger disk
+minimuumu steps = 2^(n)-1
+
+algorithm:
+-create function hanoi(n,source,inter,dest)
+-if disk==1
+	move disk from source to dest
+else{
+	Hanoi(n-1,source,dest,inter)
+	move disk from source to dest
+	Hanoi(n-1,inter,source,dest)
+end if
+
 

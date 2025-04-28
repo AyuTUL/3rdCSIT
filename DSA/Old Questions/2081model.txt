@@ -1,0 +1,241 @@
+queue as ADT:
+a queue q of type T has follwoing operations:
+MakeEmpty(q):create an empty q queue
+IsEmpty(q):returns T is q is empty else F
+IsFull(q):returns T if q is ful lelse F
+Enqueue(q,x):inserts elemnt x at rear of queue q if q is not full
+Dequeue(q):returns an element from front of queue if q isnot empty
+Traverse(q):displays entire content of queue
+
+linear vs circular queue:
+linear 				circular
+two ends arent connected	front and rear are conencted to circle
+once elelment is dequeud,space	once element is deuqeued, space can be 
+cant be reusued			resusus
+both rear and front move forwardrear and front can both wrap around begi
+overflow rear=MAX-1		front=0 rear=MAX-1 (front=rear+1)%MAX
+task scheduling			multiplayer games
+
+hashing:
+technique in which element is mapped to specific index in a hash table
+by using hash function for storage and retrival in a single access
+hash function is a function that transforms key into corresponding index
+of hash table
+application: compilers to keep track of declared variables, online 
+spell checking, cache web pages, digital signature
+division method: divides key by a prime number and remainder is hash value
+h(k) = k mod m
+h(k):hash value of key k
+k=key(intput data)
+m=table size(usually prime)
+
+mid square method: key is squared the mid part of result is index
+eg: 3101 with table size 1000 then 3101^2=9616201 
+h(3101)=162(middle 3 digits)
+
+digit folding method: key is divided into separate parts and are combined
+using simple operatino to produce hash value
+eg: 1234567 table size 100 is divided into 12 34 56 7 combine by adding
+h(1234567)=12+34+56+7
+
+collision:
+different keys x1 and x2 may create same hash values after hashing
+h(x1)=h(x2), technique of finding alternate location is resolution
+
+direct chaining: linked list application
+-separate chaining: linked list is created from slot where collsion has
+occured and new key is inserted, looks like a chain
+adv: simple,hash table never fills up
+disadv: waste of space, chain becomes long then insert/delete/search
+time is O(n), uses extra space for links
+
+open addressing/closed hasing:array aaplication
+-linear probing: when collision occurs, hash table is searched sequentially
+starting from original hash location. if occupied, check next location
+hi(k)=(k+i)%size
+adv: easy 
+disadv: clustering(many consecutive elements form groups), takes o(n) to
+search
+
+-quadrati probing:
+hi(k)=(x+i^2)%size
+adv: easier than double hashing, removes primary cluster
+disadv: secondary cluster(have same probe sequence), not all locations
+are probed
+
+avl tree:
+type of height balanced binary tree developed by GM adelson Velsky 
+and EM Landis a binary tree is called balanced if height of left and 
+right children of each node differs by either 1 0 -1 (balance factor=height of keft sub tree - height of right subtree)
+if after insertion/deletion tree becomes unblanced, rotations(single
+/double) are performed to balance it
+
+asymptotic analysis:
+describes running time or sapce usage of algorithm as input size
+becomes very large
+ignores constants and lower order terms and only focus on dominant
+behavoir
+
+thetha(f(n))={(f(n): there exists positive constants c1 c2 n0 such
+that 0<=c1f(n)<=f(n)<=c2f(n) for all n>=n0
+
+stack:
+ADT and linear data structure in whihc elements are inserted and
+removed from same end called top LIFO
+use: evalutae convert expressions dfs recursion function call
+page visited histroy undo sequence in tect editor
+
+push:
+add element to top of stack
+if(top==MAX-1)
+	stack underflow
+else{
+	top++
+	a[top]=item
+
+pop:
+remove element from top of stak
+if(top==-1)
+	stack underflow
+else {
+	cout<<a[top]
+	top--
+
+binary search:
+use: construct bst and traverse in preorder post inorder
+
+algorithm:
+-sorted array
+-seelct milddle element n/2
+-complare with key
+	if mid==key found
+	ifmid<key search in left side of mid
+	if mid>key search in right side of mid
+repeat
+
+best case: o(1)
+average case: o(logn)
+worst case: o(logn)
+
+int binary(int a[],int n,int key)
+{
+	int low=0,high=n-1,mid;
+	while(low<=high)
+	{
+		mid=(low+high)/2;
+		if(key==a[mid])
+			return mid;
+		else if(key<a[mid]
+			high=mid-1;
+		else
+			low=mid+1;
+	}
+	return -1;
+}
+
+dijkstra algorithm:
+-remove all loops
+-remove parallel edges between 2 vertices having higher weight
+-create weight matrix table
+	a set 0 to source vertex and infinite to remaining
+	b mark smallest unmarked value and mark coresponding vertex
+	c find vertices directly conected to marked vertex, update all
+		if d[u]+c[u,v]<d[v]
+			d[v]=d[u]+c[u,v]
+		new destination=min(old dest,marked val+weight)
+	repeat b c until final destination vertex is marked
+-find shortest path by backtracking
+	take final destination vertex as initial path
+	move pointer to where vertex value changes in same vertex
+	update pointer to that row to smallest marked value of row
+	repeat b and c until source vertex is reached
+	reverse order of vertex 
+
+insertion:
+void insertion(int *a,int n)
+{
+	for(int i=1;i<n;i++)
+	{
+		int temp=a[i];
+		int j=i-1;
+		while(j>=0 && a[j]>temp)
+		{
+			a[j+1]=a[j];
+			j--;
+		}
+		a[j+1]=temp;
+	}
+}
+
+stack using linked list:
+struct NODE
+{
+	int data;
+	struct NODE *next;
+};
+typedef struct NODE Node;
+class Stack
+{
+	private:
+		Node *top;
+	public:
+		Stack()
+		{
+			top=NULL;
+		}
+		bool isEmpty()
+		{
+			return(top==NULL);
+		}
+		~Stack()
+		{
+			while(!isEmpty())
+				pop();
+		}
+		void push()
+		{
+			Node *newNode=new Node();
+			cout<<endl<<"Enter data to be pushed : ";
+			cin>>newNode->data;			
+			if(isEmpty())
+				newNode->next=NULL;
+			else
+				newNode->next=top;
+			top=newNode;
+			cout<<endl<<"Pushed "<<top->data<<" to stack"<<endl;
+		}
+		void pop()
+		{
+			if(isEmpty())
+				cout<<endl<<"Stack underflow"<<endl;
+			else
+			{
+				cout<<endl<<"Popped item = "<<top->data<<endl;
+				Node *temp=top;
+				top=top->next;
+				delete temp;
+			}	
+		}
+		void view()
+		{
+			if(isEmpty())
+				cout<<endl<<"Stack underflow"<<endl;
+			else
+			{
+				cout<<endl<<"Stack :"<<endl;
+				Node *temp=top;
+				while(temp!=NULL)
+				{
+					cout<<temp->data<<endl;
+					temp=temp->next;
+				}
+			}
+		}
+		void peek()
+		{
+			if(isEmpty())
+				cout<<endl<<"Stack underflow"<<endl;
+			else
+				cout<<endl<<"Top of stack = "<<top->data<<endl;
+		}
+};

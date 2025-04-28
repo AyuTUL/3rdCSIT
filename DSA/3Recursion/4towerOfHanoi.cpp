@@ -7,9 +7,7 @@ void Hanoi(int n,int source,int inter,int dest)
 	{
 		i++;
 		cout<<endl<<"Step "<<i<<" : "<<"Move disk from tower "<<source<<" to "<<dest;
-		
 	}
-		
 	else
 	{
 		Hanoi(n-1,source,dest,inter);

@@ -1,0 +1,176 @@
+circular queue:
+improvement upon linear queue in which the two ends of the queue are 
+conencted through a pointer where the very first element comes after 
+hte last element making a circle
+-follows fifo
+-2 pointers rear and front
+-if rear reaches end, then goes back to 0 if there is space
+-CPU scheduling(round robin), multiplayer games(after last player, 
+first players turn again), traffic lights(round robin)
+
+drawbacks of linear queue:
+in linear queue, once the queue is completely full, it isnt possible to
+insert more elements even if elements are dequeued, elements cant be 
+inserted in dequeued space until full reset
+figure f | 1 2 3 4 | r dequeue |    f 4 |
+whene we dequeue elemnt, we are only moving the front of queue forward 
+not actually craeting free space. the new element to be inserted still
+ has to be inserted from the rear but rear pointer is still at end of 
+queue. circular queue reuses empty spaces created by earlier dequeues 
+circular queue figure
+
+stack vs queue:
+stack				queue
+lifo				fifo
+push pop			enqueue dequeue
+top pointer			front rear pointers
+undo history book stack	printer queue ticket line
+no types			linear circular doubly circular doubly
+function call backtracking	scheduling buffer handling
+
+avl tree:
+type of height balanced binary tree developed by GM adel'son Vel'sky 
+and EM Landis a binary tree is called balanced if height of left and 
+right children of each node differs by either 1 0 -1 (balance factor=height of keft sub tree - height of right subtree)
+if after insertion/deletion tree becomes unblanced, rotations(single
+/double) are performed to balance it
+
+heap vs tree:
+heap					tree
+specialized complete binary tree	general heirarchical structure
+always complete 			can be skewedd/balanced
+parent node is>=max heap of <=min heap	in BST, left<root<right
+fast acccess to max/min element		organize and search elements efficiently
+priotirty queue				BST,AVL tree
+
+list:
+ADT in which elements are stored in ordered manenr for easy and 
+efficient retrieval array stores only homogenous data but list can 
+store heterogeneous data
+list1=[1,2,3] list2=[1,'a',"koko","moko"]
+static(Array) dynamic(linked list)
+
+stack using linked list:
+when stack is implemented using array, its size has to be known 
+in advance and cant be changed at run time. but if implemeneted using
+ linked list, it works for unlimited no. of elements. figure
+
+circular linked list:
+last node of linked list points to first making a circle
+no NULL in next part of any node
+first node is called first and last node is called last
+figure 
+
+A+(((B-C)*(D-E)+F)/G)$(H-I) into postfix
+if precedence same, check associativity, if LTR pop
+ABC-DE-*F+G/HI-$+
+
+MST:
+spanning tree is sub graph of a graph that connects all vertices 
+of original graph without forming a cycle
+total no. of spanning trees = n^(n-2)
+among all the spanning tress of a weighted connected graph, the 
+spanning tree with the least total edge weight is called MST
+
+shell sort:
+breaks the list into sub lists using interval called gap then sorts 
+the sub lists using insertion sort
+
+hashing:
+technique in which element is mapped to specific index in a hash table
+by using hash function for storage and retrival in a single access
+hash function is a function that transforms key into corresponding index
+of hash table
+application: compilers to keep track of declared variables, online 
+spell checking, cache web pages, digital signature
+division method: divides key by a prime number and remainder is hash value
+h(k) = k mod m
+h(k):hash value of key k
+k=key(intput data)
+m=table size(usually prime)
+
+mid square method: key is squared the mid part of result is index
+eg: 3101 with table size 1000 then 3101^2=9616201 
+h(3101)=162(middle 3 digits)
+
+digit folding method: key is divided into separate parts and are combined
+using simple operatino to produce hash value
+eg: 1234567 table size 100 is divided into 12 34 56 7 combine by adding
+h(1234567)=12+34+56+7
+
+collision:
+different keys x1 and x2 may create same hash values after hashing
+h(x1)=h(x2), technique of finding alternate location is resolution
+
+direct chaining: linked list application
+-separate chaining: linked list is created from slot where collsion has
+occured and new key is inserted, looks like a chain
+adv: simple,hash table never fills up
+disadv: waste of space, chain becomes long then insert/delete/search
+time is O(n), uses extra space for links
+
+open addressing/closed hasing:array aaplication
+-linear probing: when collision occurs, hash table is searched sequentially
+starting from original hash location. if occupied, check next location
+hi(k)=(k+i)%size
+adv: easy 
+disadv: clustering(many consecutive elements form groups), takes o(n) to
+search
+
+-quadrati probing:
+hi(k)=(x+i^2)%size
+adv: easier than double hashing, removes primary cluster
+disadv: secondary cluster(have same probe sequence), not all locations
+are probed
+
+-double hashing: 
+h1(k)=k mod size
+h2(k)=R - (k mod R)
+h(k)=h1(k) + i x (h2(k) % size)
+R: prime smaller than size
+size must be prime
+adv: reduce clustering, requires fewer comparison, smaller hash tables
+disadv: as table fills up performance decreases
+
+rehashing:
+load factor lamba= no. of items in hash table/size
+if lamba greater than 0.7, hash table is doubled to nearest prime
+new hash value of each element  is calcualted and inserted in new table
+
+linked list: 
+linear data structure in which each element is stored as a node not
+in contigous location but linked using pointers
+node is made of 2 parts data field(stores element) and link field
+(stores address of next node)
+dynamic, no. of nodes isnt fixed and can grow/shrink on demand
+used in dma,stack,queue,undo function,separate chaining in hashing
+
+doubly linked list:
+node is mode of 3 parts prevoiuos data and next
+previous points to previous node and next points to next
+both forawrd and backward traversal is possible
+use: navigations sytem(move forward and backward through routes)
+music playlist(swithc to next or previuos song)
+web browsers(move backward and forward thourugh pages visited)
+
+linear queue:
+linear data structure or ADT in which elements are inserted from rear
+and removed from front. FIFO ,enqueue,dequeue
+use: radix sort, task scheduling,bfs
+
+bfs/lever order search:
+produces spaning tree as final result
+queue of size total vertices in graph
+
+algorithm:
+-define queue of size total vertices in graph
+-select any vertex as starting point for traversal. visit that vertex 
+and insert into queue
+-visit all non visited adjacent vertices of the vertex at the front of 
+queue and insert in the queue
+-when there is no new vertex to be visited from vertex at front of queue
+delete that vertex
+-repeat until queue is empty
+-final spanning tree is produced by removing unused edges from graph
+
+

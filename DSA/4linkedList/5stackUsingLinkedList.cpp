@@ -4,13 +4,13 @@ using namespace std;
 struct NODE
 {
 	int data;
-	struct NODE* next;
+	struct NODE *next;
 };
 typedef struct NODE Node;
 class Stack
 {
 	private:
-		Node* top;
+		Node *top;
 	public:
 		Stack()
 		{
@@ -46,7 +46,6 @@ class Stack
 				cout<<endl<<"Popped item = "<<top->data<<endl;
 				Node *temp=top;
 				top=top->next;
-				temp->next=NULL;
 				delete temp;
 			}	
 		}

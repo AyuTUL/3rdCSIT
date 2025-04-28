@@ -4,13 +4,13 @@ using namespace std;
 struct NODE
 {
 	int data;
-	struct NODE* next;
+	struct NODE *next;
 };
 typedef struct NODE Node;
 class CircularLinkedList
 {
 	private:
-		Node* head;
+		Node *head;
 	public:
 		CircularLinkedList()
 		{
@@ -143,9 +143,10 @@ class CircularLinkedList
 				deleteAtFront();
 			else
 			{
+				int i;
 				Node *temp1=head;
 				Node *temp2=NULL;
-				for(int i=1;i<n && temp1->next!=head;i++)
+				for(i=1;i<n && temp1->next!=head;i++)
 				{
 					temp2=temp1;
 					temp1=temp1->next;

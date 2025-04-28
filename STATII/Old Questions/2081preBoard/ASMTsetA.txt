@@ -1,6 +1,3 @@
-ASMT:
-SET A
-
 1. Explain the purpose of applying multiple linear analysis?
 to understand the relationship between 1 dependent y and 2/more independent x variables
 -prediction: predict value of y based on known values of x eg house price based on size age
@@ -8,3 +5,11 @@ to understand the relationship between 1 dependent y and 2/more independent x va
 -control for confounding variables: isolate effect of each x controlling influence of others
 -testing hypothesis: theorize how variables are related
 -modling real world situations: real world outcoems are raely influenced by just one factor, realistic accurate
+
+2. Assumptions involed in t test for testing significant difference ebtween 2 sample means(paired t test)
+-dependent variable is continuous (interval/ratio scale data)
+-sample must be related/dependent
+-random sample of data
+-difference between paired values must be approximately normally distributed
+- no outliers in the difference between 2 related groups
+

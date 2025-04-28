@@ -1,0 +1,67 @@
+circular queue:
+improvement upon linear queue in which the two ends of the queue are conencted through a 
+pointer where the very first element comes after hte last element making a circle
+-follows fifo
+-2 pointers rear and front
+-if rear reaches end, then goes back to 0 if there is space
+-CPU scheduling(round robin), multiplayer games(after last player, first players turn again)
+traffic lights(round robin)
+
+drawbacks of linear queue:
+in linear queue, once the queue is completely full, it isnt possible to insert more elements
+even if elements are dequeued, elements cant be inserted in dequeued space until full reset
+figure f | 1 2 3 4 | r dequeue |    f 4 |
+whene we dequeue elemnt, we are only moving the front of queue forward not actually craeting free space. the new element to be inserted still has to be inserted from the rear but rear pointer is still at end of queue.
+circular queue reuses empty spaces created by earlier dequeues circular queue figure
+
+stack vs queue:
+stack				queue
+lifo				fifo
+push pop			enqueue dequeue
+top pointer			front rear pointers
+undo history book stack	printer queue ticket line
+no types			linear circular doubly circular doubly
+function call backtracking	scheduling buffer handling
+
+avl tree:
+type of height balanced binary tree developed by GM adel'son Vel'sky and EM Landis
+a binary tree is called balanced if height of left and right children of each node differs
+by either 1 0 -1 (balance factor=height of keft sub tree - height of right subtree)
+if after insertion/deletion tree becomes unblanced, rotations(single/double) are performed
+to balance it
+
+heap vs tree:
+heap					tree
+specialized complete binary tree	general heirarchical structure
+always complete 			can be skewedd/balanced
+parent node is>=max heap of <=min heap	in BST, left<root<right
+fast acccess to max/min element		organize and search elements efficiently
+priotirty queue				BST,AVL tree
+
+list:
+ADT in which elements are stored in ordered manenr for easy and efficient retrieval
+array stores only homogenous data but list can store heterogeneous data
+list1=[1,2,3] list2=[1,'a',"koko","moko"]
+static(Array) dynamic(linked list)
+
+stack using linked list:
+when stack is implemented using array, its size has to be known in advance and cant be changed at run time. but if implemeneted using linked list, it works for unlimited no. of elements. figure
+
+circular linked list:
+last node of linked list points to first making a circle
+no NULL in next part of any node
+first node is called first and last node is called last
+figure 
+
+A+(((B-C)*(D-E)+F)/G)$(H-I) into postfix
+if precedence same, check associativity, if LTR pop
+ABC-DE-*F+G/HI-$+
+
+MST:
+spanning tree is sub graph of a graph that connects all vertices of original graph without forming a cycle
+total no. of spanning trees = n^(n-2)
+among all the spanning tress of a weighted connected graph, the spanning tree with the least total edge weight is called MST
+
+shell sort:
+breaks the list into sub lists using interval called gap then sorts the sub lists using insertion sort
+

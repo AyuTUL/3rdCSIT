@@ -1,0 +1,57 @@
+inherent erros:
+arrise naturally due to limitation of method itself
+unavoidable and can only be elimninated
+-truncation,round off,discretization,algorithmic,propagation error
+
+limitations of direct methods
+-computational cost:longer time complexity so expensive for large systems
+-memory usage: requires storing all coefficaints and intermddiate results
+-numerical instabiulity: small round off erros during elimination can
+accumulate especially in ill conditioned system leading to inaccurate 
+results
+-lack of scalability: not suitale for very large/sparse systems
+-poor paralleliation: due to sequential dependecy in row operations
+
+jacobi vs gauss seidel:
+jacobi				gauss seidel
+uses only previuos iteration	uses newly computed valeus immediately
+values for all variables
+convergence slower		convewrgence faster
+easy to paralleize(all updates	harder(updates are dependent
+are independent)
+requires storing both old and	can overwarite values(less memory usage)
+new values
+
+
+regression analysis:
+process of finding relationship between dependent & independent variable
+to predict vaclue of dependent based in inde[pendet
+understand how change in independent affets dependent
+model trends/pattern in data
+use: forecasting sales/weather,risk assessment,machine learning AI
+
+numerical differentation:
+fiding appropximate derivative of function using numerical technique
+required when:
+-functional values are known but function is unkonw(tabulate dfunctions)
+-function to be diferentiated is complciated
+Ill Conditioned Systems
+
+numerical integratoin:
+process of fidning integration of a function using set of tabulated data
+use:
+engineering: area under stress strain curves to calculate work done
+,velocity time data
+economics:area under demand curve
+population:integrate birth/death rate functions to predict future popn
+iamge processing:compute surface area and voolume from scanned image data
+
+What is differential equation? Differentiate between ODE and PDE with example.
+DE is eqn that uses derivates to exrepss realtionship between depednent
+and indepenedent variables.eg:modeling real world phenomena like heat,
+fluid flow popn growth
+ODE vs PDE:
+ODE				PDE
+contains derivatives wrt to 1 x	contains derivatives wrt 2/more x
+
+

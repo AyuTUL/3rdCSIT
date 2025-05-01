@@ -239,3 +239,17 @@ class Stack
 				cout<<endl<<"Top of stack = "<<top->data<<endl;
 		}
 };
+
+ADT:
+type/class for objects whose behaviuor is defined by set of 
+values and set of operations. it doesnt specify how data
+will be organized in memmory and what algoeithms will be
+used for implementing the operations.
+use: desing/analysis of algorithms,data structures, data
+abstraction and data hiding
+adv:modularity,precise specifications,info hiding,simplicity,
+integrity,implementation independence
+
+circular linked list:
+last node of list points to first node
+no NULL value in any part of node

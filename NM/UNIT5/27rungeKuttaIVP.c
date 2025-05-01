@@ -1,6 +1,6 @@
 //Lab 27 : WAP in C that solves initial value problem using Runge Kutta method
 #include<stdio.h>
-#define f(x,y) (2*(x)+(y))
+#define f(x,y) ((x)/(y))
 int main()
 {
 	float x,xp,x0,y0,y,h,m1,m2,m3,m4;
@@ -20,7 +20,7 @@ int main()
 		m3=f(x+h/2.0,y+h*m2/2.0);
 		m4=f(x+h,y+h*m3);
 		y+=((m1+2*(m2+m3)+m4)*h/6.0);
-		printf("\n\ty(%.2f) = %.5f",x+h,y);
+		printf("\n\tm1 = %.5f\n\tm2 = %.5f\n\tm3 = %.5f\n\tm4 = %.5f\n\ty(%.2f) = %.5f\n",m1,m2,m3,m4,x+h,y);
 	}
 	return 0;
 }

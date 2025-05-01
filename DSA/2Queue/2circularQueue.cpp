@@ -23,7 +23,7 @@ class CircularQueue
 			{
 				cout<<endl<<"Enter item to be queued: ";
 				cin>>item;
-				if(front==-1 && rear==-1)
+				if(isEmpty())
 					rear=front=0;
 				else
 					rear=(rear+1)%MAX;

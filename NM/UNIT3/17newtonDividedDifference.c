@@ -4,7 +4,6 @@
 #define MAX 10
 int main()
 {
-	system("color f0");
 	int n,i,k,j;
 	float factor,term,vod,xv,x[MAX],fx[MAX],a[MAX];
 	printf("Enter no. of data points : ");

@@ -17,7 +17,7 @@ int main()
 	else
 	{
 		for(int i=0;i<n;i++)
-		cout<<fibo(i)<<"\t";
+			cout<<fibo(i)<<"\t";
 	}
 	return 0;
 }

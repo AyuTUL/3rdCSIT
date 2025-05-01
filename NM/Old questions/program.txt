@@ -1,0 +1,11 @@
+program:
+lagrange
+heun
+
+derive:
+newton raphson
+
+revise:
+spline
+
+

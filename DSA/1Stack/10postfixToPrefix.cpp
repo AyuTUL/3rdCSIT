@@ -76,7 +76,6 @@ string convert(string exp)
 }
 int main()
 {
-	system("color f0");
 	string postfix;
 	cout<<"Enter postfix expression : ";
 	getline(cin,postfix);

@@ -1,0 +1,25 @@
+how recursive algorithm uses stack to store intermediate result
+when recursive function is called, ysstem automatically pushes
+information onta a call stack that stores function's parameters
+,local variables and return address(where to go back after 
+recursion ends). when recusrion returns, the stackk pops the
+stored inf and reusmes the function from where it lieft off
+thus, the system stack helps to managhe multiple recursive 
+calls automatically
+
+call factorial(3)
+1st fact(3) is called stack stores n=3
+then fact(2) stores n=2
+fact(1) stores n=1
+fact(0) returns 1 immediately
+
+stack unwinds as:
+fact(1)=1x1=1
+fact(2)=2x1=2
+fact(3)=3x2=6
+
+prims algorithm:
+-randomly choose a vertex
+-select connected vertex with least edge weight
+-find all edges conencted to that vertex and choose least weigh
+-if forms cyckle reject edge and find next least weight edge

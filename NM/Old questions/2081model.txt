@@ -1,0 +1,71 @@
+small changes in the coefficient result in large deviations in solution
+wide range of answers can satisfy such equations
+completely erroneous set of answers may produce zero/near zero residuals
+Ill conditioned systems are very sensitive to round off errors.
+These errors during computing process may induce small changes in the 
+coefficients which in turn, may result in a large error in the solution
+We can decide the condition of a system either graphically or mathematically
+Graphically, if two lines appear almost parallel, then we can say 
+system is ill conditioned, since it is hard to decide just at 
+which point they intersect
+The problem of ill-condition can be mathematically described  as 
+follows. Consider a two equation system
+a11x1+a12x2 = b1
+a21x1+a22x2 = b2
+ if these two lines are almost parallel, their slopes must be 
+nearly equal. That is,
+
+a11/a12 = a21/a22
+Alternatively,
+a11a22 = a12a21
+Or a11a22 - a12a21=0
+when:
+determinant of coefficient matrix is close to zero
+matrix is nearly singular
+eqns are nearly linearly dependent
+
+gauss elim vs gauss jordan
+gauss elim			gauss jordan
+forwards elim + back substitue	forward elimination+ reduce to I matrix
+row echelon form		reduced row echelon form
+upper triangular matrix		identity matrix
+computaiton cost is less	more
+easy for large system		complex
+solving system of eqns		inverse of matrix
+
+interpolation:
+given n+1 data points says x0,y0 ,x1,y1,...xn,yn. interpolation
+is the processof finding a polynomial function of order n which 
+passes through thsese data points and finding the value of y at some 
+point say xk (x0<=xk<=xn)
+
+extrapolation:
+given n+1 data points says x0,y0 ,x1,y1,...xn,yn. extrapolation
+is the processof finding a polynomial function of order n which 
+passes through thsese data points and finding the value of y at some 
+point say xk (xk<x0 and xk>xn)
+
+heun:
+#include<stdio.h>
+#define f(x,y) ((x)*(x)+(y)*(y))
+int main()
+{
+	float x,xp,x0,y0,y,h,m1,m2;
+	printf("Enter initial values of x and y : ");
+	scanf("%f%f",&x0,&y0);
+	printf("Enter the point at which function is to be evaluated : ");
+	scanf("%f",&xp);
+	printf("Enter step size : ");
+	scanf("%f",&h);
+	y=y0;
+	x=x0;
+	printf("Using Heun's method,");
+	for(x=x0;x<xp;x+=h)
+	{
+		m1=f(x,y);
+		m2=f(x+h,y+h*m1);
+		y+=((h/2)*(m1+m2));
+		printf("\n\ty(%.2f) = %.5f",x+h,y);
+	}
+	return 0;
+}

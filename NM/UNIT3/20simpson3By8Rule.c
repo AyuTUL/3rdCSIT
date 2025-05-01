@@ -1,7 +1,7 @@
 //Lab 20 : WAP in C that integrates given function using Simpson's 3/8 rule
 #include<stdio.h>
 #include<math.h>
-#define F(x) (1/(sqrt(x*x+x+1)))
+#define F(x) (exp(x)/x)
 float basicSimpson(float x0,float x3)
 {
 	float x1,x2,f0,f1,f2,f3,h,in;

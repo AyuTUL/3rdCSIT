@@ -1,6 +1,6 @@
 //Lab 27 : WAP in C that solves initial value problem using Runge Kutta method
 #include<stdio.h>
-#define f(x,y) ((x)/(y))
+#define f(x,y) (3*x-y)
 int main()
 {
 	float x,xp,x0,y0,y,h,m1,m2,m3,m4;

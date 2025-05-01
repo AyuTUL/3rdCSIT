@@ -1,7 +1,7 @@
 //Lab 18 : WAP in C that integrates given function using Trapezoidal rule
 #include<stdio.h>
 #include<math.h>
-#define F(x) (exp(x)/x)
+#define F(x) (x*x*x+2)
 float basicTrapezoidal(float x0,float x1)
 {
 	float h,f0,f1,in;

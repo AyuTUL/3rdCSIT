@@ -2,7 +2,7 @@
 #include<math.h>
 #define N 10
 #define ERROR 0.00001
-#define F(x,y) (x*y)
+#define F(x,y) (-64*x*y)
 void initializeGrid(float u[][N],int n,float f) 
 {
     int i,j;

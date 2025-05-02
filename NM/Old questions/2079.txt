@@ -6,6 +6,22 @@ position
 -reduces rounding error by avoidiong very small divison
 -works for convergeance in ill conditioned systems
 
+Lagrange Interpolation	vs Spline Interpolation
+Global polynomial interpolation	Piecewise polynomial interpolation
+Uses a single polynomial of 	Uses multiple low-degree polynomials
+degree n for n+1 data points	(usually cubic) between each pair of points
+pn grows with no. of points, 	Efficient and stable even with many data points
+becomes unstable for large n	
+Continuous but not necessarily 	Usually ensures smooth first and second derivatives at joins (especially cubic splines)
+smooth derivatives at all points	
+recomputation of entire pn 	Only the affected intervals need recomputation
+if a point changes	
+Susceptible to Runge’s phenomenon Minimal oscillation; very stable interpolation
+(large oscillations) for high degrees	
+Best for small datasets where 	Preferred for large datasets or when smooth interpolation is critical (e.g., graphics, CAD)
+global behavior is desired	
+
+
 #include <stdio.h>
 #include <math.h>
 #define MAX 10

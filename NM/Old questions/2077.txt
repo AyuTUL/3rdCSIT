@@ -1,0 +1,31 @@
+drawbacks of newton rpahson:
+-requires derivative
+-poor initial guess leads to divergence/convergence to
+wrong root
+-if dx=0 method wont work due to div by 0
+-may not converge for function with steep inflection point
+-not guarantee to find root unless guess is close
+
+regression vs interpolation
+regression			interpolation
+approximate a best fix to data	exact fit through all data points
+degree of polynomial is low	degree=no. of points -1
+doesnt pass through all points	pass through all points
+noisy/overdetermined data	exact value/small data points
+
+pivoting:
+reaaranging the rows/columns of a matrix to largest
+non-zero element called pivot in pivot(diagonal elment)
+position
+-avoids /0
+-reduces rounding error by avoidiong very small divison
+-works for convergeance in ill conditioned systems
+
+gauss elim vs gauss jordan
+gauss elim			gauss jordan
+forwards elim + back substitue	forward elimination+ reduce to I matrix
+row echelon form		reduced row echelon form
+upper triangular matrix		identity matrix
+computaiton cost is less	more
+easy for large system		complex
+solving system of eqns		inverse of matrix

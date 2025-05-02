@@ -2,7 +2,7 @@ newton vs secant
 newton				secant
 needs 1st derivative of fn	uses finite difference
 1 initial guess			2 initial guesses
-quadratic convergence (faster)	superlinear convergeance 				(slower)
+quadratic convergence (faster)	superlinear convergeance(slower)
 when derivative is easy		when dx is difficult
 more expensive, derivative	less expensive no dx 
 

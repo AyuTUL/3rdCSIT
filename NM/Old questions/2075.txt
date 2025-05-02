@@ -1,0 +1,18 @@
+A non-linear equation is an equation in which the variables do not 
+appear only to the first power and are not simply added or multiplied 
+by constants.
+
+Matrix factorization (or decomposition) is the process of expressing 
+a matrix as a product of two or more simpler matrices, often to make 
+solving systems or finding inverses easier.
+Used in:
+    Solving systems of linear equations efficiently
+    Numerical stability in computations
+    Computer graphics, simulations
+
+regression vs interpolation
+regression			interpolation
+approximate a best fix to data	exact fit through all data points
+degree of polynomial is low	degree=no. of points -1
+doesnt pass through all points	pass through all points
+noisy/overdetermined data	exact value/small data points

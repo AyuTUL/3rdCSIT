@@ -1,0 +1,21 @@
+A differential equation is called nth-order if the highest derivative 
+in the equation is of order n.
+
+problem with interpolation for large data points
+-runge phenomenon: large oscialltions near edge of interval
+poor approximation though polynomia lpasses through all points
+
+-numerical instability: high degress polynomial are sensistive to
+small change in data values, round off errors
+
+-computational cost: more comptation,inefficient
+
+soltion:
+-spline: piecewise polynomial interpolation
+breaks interval into smaller sub intervals and fit lower degree
+polynomials in each part,smooth ,avoids oscillations
+
+-least square approximastion
+when data has noise ,function is unknown
+bset fit data, not exactly interpoalte
+reduces error and improvecs stability

@@ -126,7 +126,7 @@ generator: generates parity bit and appends to message in sender sidew
 checker: checks parity bit in receiver side and determines if error occir
 
 instructoin format:
-layout bits of instruction
+layout bits of machien level instruction
 in 16 bit format, 3 fields
 mode(1)-bit 15 specifies addresing mode (0:direct 1:indirect)
 opcode(3)-bit 12-14 speficifes operation for intrcutoin add,multriply,shift
@@ -153,3 +153,113 @@ common bus sytem:
 path for transfer info between registser and moomery to register
 o/p of regusters and memory connected t ocommon bus
 s2 s1 s0 control which register/memory bus selects as input
+
+flynns classification:
+organization of computer system by MJ Flynn based on no. of instruction
+and data streams that are processed simultaneously
+ins stream is sequuence of instr read from memory
+data stream is operations performed on data in processor
+
+sisd:
+single computer containg 1 CU PU MU
+instructions are executed equentially, system may not have paralel procesing
+parallel processing is achceived by multiple functional units/pipelining
+traditiional von neumann comcputers,older gen cmops,minicomp,workstations
+instructions are decoded by CU nad sent to PU for execution
+
+simd:
+many PU under single CU
+all processorts receive same instr from CU but operate on diferent data item
+shared memory has multiple moduels to communicate with all prcoess simultan
+wireless MMX unit by intel, GPU for image processing,scientific computing
+
+misd:
+theoritcal
+mulitple processing unit operate on single data stream
+each PU operates on data independently via spearpaete instru stream
+real time system for reliability in aerospace
+
+mimd:
+multiple processor execute different instruction on different data
+each processor has sperpate prgogram and instr stream is generated from it
+cray t90,multi core CPU,distributed systems,cloud computing for general
+pruppes parallel processing,multitasking environemnts
+
+io interface
+special hardawre between CPU and peripheral to supervise sync io transfers
+interface unit becasue tehy interface between processor bus and peripherals
+why?
+-peripherals are electromechanical/magnetic, their way of operting is
+diferent from that of CPU and memory which are electronic
+-data trnasfer date of peripherals is slower than that of CPU require sync
+-data format of perohperals differ from that in CPU and memory
+-operating modes of peripherals differ from each other and control is 
+needed to not distrub the operations od other perihperals connected
+
+programmed io:
+CPU is in full control of io operation
+CPU continuosly polls io device to see if ready for adta transfer
+data transfer is initiated by io instrctuion written in program
+all operateiions read/wrtie are carreid out under CPU supervision
+flow chart 
+
+steps:
+cpu send io command to device
+cpu keeps checking device status (polling)
+once device is ready, data is transferred
+cpu continues with next instruciot
+
+adv: simple,little hardward
+disadv: busy waiting, CPU is tied up for long time with no useful work
+
+interrupt initiated io:
+cpu inintiates io but doesnt wait/polls io device continuously
+instead device interrupts cpu when ready for data transfer
+
+adv: cpu can perform other tasks while io operation is in progress
+
+steps:
+cpu sends io command to device
+cpu process with other work(no polling)
+when device is readym sends itnerrupt signal to CPU
+cpu suspends current excutoin and calls ISR
+isr handles io data rransfer
+CPU resumes previous work after sevicing interrupt
+
+cache mapping:
+technique used tp place main memory block in to cahce memory lcoation
+decides where to store and how to retreive data from cache for efficieny
+
+direct mapping:
+each block of main memory maps to exactly one cache line 
+not flexible
+fig
+
+shift microoperations:
+shieft bit of binary data left or right
+sued for serial transfer of data,bit manipulation, aritmetic operations
+
+logical shift: 
+shifts data left or right, filling vacant bit with 0
+left: shiftts all bit to left, 0 inserted at rightmost bit
+right: shift all bit to right, 0 inserted at leftmost bit
+
+arithmetic:
+used for signed binary numbers
+sign ibt MSB must be kept same while shifting
+left: same as logcial left shift,multiplies signed number by 2
+right: copeis sign bit to vacant MSBdivides signed nubmer by 2
+
+circular: serial input is the bit that is shiefted out from other end
+
+risc vs cisc:
+risc 					cisc
+ins set is small simple			ins set is large complex
+ins length is fixed			ins length is varaible
+exe speed is faster(one per cycle)	slower(multiple cycles)
+specific ins load/store for memory acc	any instruction may access
+larger code size			smaller code size
+easy pipeline				harder pipeline
+hardwired control unit			micro programmed CU
+more data in regesters for less mem acc	more use of memort for less register
+arm risc-v mips				interl x86 amd motorolla 608000

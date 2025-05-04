@@ -1,0 +1,111 @@
+DMA:
+data transfer between peripherals and memory without interaction of CPU
+CPU relinquishes control of memory bus, free to perform other tasks
+peripherals manage mermory bus dorectly
+
+DMA controller:
+hardware for transferring data between peripherals and main memory rith
+minimal interventin from cpu
+3 registers
+-address register:specifies desried memory location incremented after each
+word is transferred between memory
+-word count: no. of words to be transferred, decremented after each word is
+transferred until 0=>ends of transfer. BG from cpu is made low and cpu
+contines exexuting prevoious instruction
+-control: species mode of transfer(read/write)
+
+block diagram:
+registers of controller are selected by cpu through address bus by
+enabling DS RS input signal
+RD WR are bidirectinonal
+BR=1; cpu terminates execution of current isntruction and relinquesh mem bus
+BG=0; cpu communicates with dma registers thorugh data bus and 
+activating RD WR as niput lines
+BG=1; dma directly communicates with memory by specifiying address in
+address bus and activating RD WR as output lines
+BR=0; dma complte
+
+arithmetic overflow:
+occurs when result of arithmetic operation exceeds range that can be
+represented with available number of bits in a system
+usually occurs in add,sub with signed numbers
+range for 8 bit signed numbers = -128 to +127
++127+1=-128 due to overflwo but exoected +128
+
+detection:
+2 +ve sum=-ve
+2 -ve sum=+ve
+(a[msb]==b[msb]) and (sum[msb!=a[msb])
+hardware: carry into MSB XOR carry out of MSB
+
+microprogram sequencer:
+part of microprogrammed CU that generates address of next micro instruction
+to be executed from control memeory
+input logic has 3 inputs I0 I1 supplied by branch fieled of control
+mermory and T(test) by mux2. its output s0 s1 is supplied as select lines
+for mux1 and L(load) to SBR(subroutine register)
+mux 1 has 4 inputs, external MAP(memort addres pointer),sbr,addres field
+of conrtol memory and increment, selecets one and store in control address
+register(car)
+mux2 input 1 i s z select line from condition field of CM
+
+cache memory:
+small high speed memory located between cpu and main memory ram
+stores copies of frequently accessed data/instruc so cpu can access them
+faster than fetching from ram
+recude average memory access time, improvign system performance
+
+elements of cachce desing:
+cache size:
+total amount of data cacha can hold
+affects hit rate and cost
+
+block size:
+amoutn of data transferred at once
+
+mapping function:
+how memory blocks are placed in achce
+direct: particular block of main memory placed in particular cache line
+associative: block of main memory placed in any cache line
+set associative: cache is divided into sets, each main memory blcok mapped
+to one set but inside the set, it can go to any line
+replacement policy:
+if cache is full, decides which block to replace
+direct:no policy as no choice of block palcement
+associativee: replace cells of cache in fifo policy
+set associative: random replacement, fifo or lru(least recently used)
+
+write policy:
+how writes to memory are handles
+cache hit operation:
+cpu issues read/write requests 
+if requested word exists in cache, read/write is performed in cache (hit)
+
+hit case:
+in read, main memory isnt involved
+in write
+-cache and main memory are updated simulatenou(write through)
+-update only cache location, mark it as dirty/modified bit then update
+main memory location at time of cache block removal(write/copy back)
+
+read miss case:
+if requested word isnt in cache
+-entire block of word contaiging requested word is copied from main memory
+to cache and particular word is sent to cpu from cache (load through)
+-reuqested word from memory is sent to cpu frist then cache is updated
+(early restart)
+
+write miss case:
+if requested word is not in cache
+-if write throuh, info is directly written to main memory
+-if write back, block containg word brought to cache then word is overwritte
+hit rate/mis rate:
+higher hit rate=better performance
+
+microoperations:
+processor register place where data is held
+register may contain instruction,address or data
+operations on data in registers are microoperations
+
+arithmetic microoperations:
+add,sub,inc,dec,add with carry,sub with borrow,transfer/load

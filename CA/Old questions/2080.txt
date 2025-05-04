@@ -109,3 +109,187 @@ operations on data in registers are microoperations
 
 arithmetic microoperations:
 add,sub,inc,dec,add with carry,sub with borrow,transfer/load
+
+pipelining:
+decompsoing a sequatial process into sub processes with each sub prcess
+being executed in a special dedeicated segment that opertes concurrently
+with aall other segments
+each segment performs partial processing as specified by the way task
+is partitioned. result obtained from copmutation in each segment is
+transferred to next segment in pipelinle. the final result is obtained
+after data has passed through all segments
+
+pipeline hazards:
+sistutaion thaht prevent next instruction in instruction stream from
+execting during its desinagted cycel
+
+structural/resource conflict:
+access to memmory by 2 segmeetns at same time
+with one memory port, data and instru fetch cant be initiated in same clock
+sol: 
+-using sperate instruction and data memory 
+-stall pipeline
+
+data/data dependency conflict:
+instruction depends on result of previous instruction which isnt availabe ye
+r1<-r2+r3
+r5<-r1+r4
+
+RAW:
+instruction reads data before prev instr writes it
+r1<-r2+r3
+r5<-r1+r4
+
+WAR:
+inctruction writes to a register before prev instr reads from it
+r4<-r1+r5
+r5<-r1+r2
+
+WAW:
+2 instructions write to same location
+r5<-r1+r3
+r5<-r1+r2
+
+sol:
+-hardware interlock: hardware
+hardware deects data dependcy then delays scheduling of dependent instr
+by staaling enough clokc ycles
+
+-operand forwarding: hardware
+special hardware detects conflict then avoid it by routing data through
+special path between pipeline segments
+
+-delayed load: software
+compiler detects data conflict and reorders instr to delay loading of 
+conflicting data by inserting no operations instruc
+
+control/branch conflict:
+branch and other isntr that alter sequential program flow by loading pc
+with target address
+
+sol:
+prefetch target instruction:
+fetch intructio in both streams branch taken/not
+when brnach is executed, select right sintruc stream and discard wrong
+
+branch target buffer: btb
+small associatve memory(cache) that stores previously executed brnach instr
+along with branch address and if they were taken
+
+loop buffer:
+special small buffer that stores insdtruction of small loop
+
+branch prediction:
+predict outcome of a beanch taken/not taken before acutally resolved
+
+delayed branch:
+compiler moves useful isntruction immediately after branch which always
+executes
+
+X = (A+B*C-D)/(E*F+G)
+
+0 address inst format:
+used in stack based architecure
+operaend are implicitly on top of stack
+convert to postfix
+push a
+push b
+push c
+mul
+add
+push d
+sub
+push e
+push f
+mul
+push g
+add
+div
+pop x
+
+
+1 address:
+one explicit address, other is implicilty in accumulator
+load b
+mul c
+add a
+sub d
+store r1
+load e
+mul f
+add g
+store r2
+load r1
+div r2
+store x
+
+2 address:
+source and destination, one operand is overwritten
+mov r1,b
+mul r1,c
+mov r2,a
+add r2,r1
+sub r2,d
+mov r3,e
+mul r3,f
+add r3,g
+div r2,r3
+mov x,r2
+
+3 address:
+has 2 explciit address, 2 source 1 destination
+mul r1,b,c
+add r2,a,r1
+sub r3,r2,d
+mul r4,e,f
+add r5,r4,g
+div x,r3,r5
+
+risc vs cisc:
+risc 					cisc
+ins set is small simple			ins set is large complex
+ins length is fixed			ins length is varaible
+exe speed is faster(one per cycle)	slower(multiple cycles)
+specific ins load/store for memory acc	any instruction may access
+larger code size			smaller code size
+easy pipeline				harder pipeline
+hardwired control unit			micro programmed CU
+more data in regesters for less mem acc	more use of memort for less register
+arm risc-v mips				interl x86 amd motorolla 608000
+
+flynns classification:
+organization of computer system by MJ Flynn based on no. of instruction
+and data streams that are processed simultaneously
+ins stream is sequuence of instr read from memory
+data stream is operations performed on data in processor
+
+sisd:
+single computer containg 1 CU PU MU
+instructions are executed equentially, system may not have paralel procesing
+parallel processing is achceived by multiple functional units/pipelining
+traditiional von neumann comcputers,older gen cmops,minicomp,workstations
+instructions are decoded by CU nad sent to PU for execution
+
+simd:
+many PU under single CU
+all processorts receive same instr from CU but operate on diferent data item
+shared memory has multiple moduels to communicate with all prcoess simultan
+wireless MMX unit by intel, GPU for image processing,scientific computing
+
+misd:
+theoritcal
+mulitple processing unit operate on single data stream
+each PU operates on data independently via spearpaete instru stream
+real time system for reliability in aerospace
+
+mimd:
+multiple processor execute different instruction on different data
+each processor has sperpate prgogram and instr stream is generated from it
+cray t90,multi core CPU,distributed systems,cloud computing for general
+pruppes parallel processing,multitasking environemnts
+
+common bus sytem:
+8 registers memory and control unit
+path for transfer info between registser and moomery to register
+o/p of regusters and memory connected t ocommon bus
+s2 s1 s0 control which register/memory bus selects as input

@@ -1,0 +1,88 @@
+bus interconnection scheme
+io bus is special comm link for interafcig peripherals withcpu
+interface performs:
+-decodes device addres
+-decodes commands
+-provdies signals for device controller
+synchronizes data flow and supervises transfer rate between
+perophwral and cpu/mrmroy
+
+direct mapping:
+each block of main memory is mapped to exactly one cache line
+adv:
+simple and fast: easy to implemetn
+low cost: requires fewer comparators and less logic
+predictable: each memory address maps to speicif cache lcoation
+
+disadv:
+high conflict miss: multiple memroy blcok comptele for same lin
+poor utliz:if 2 bloks map to same line keep evicting each other
+
+asso mapping:
+block from main memory mapped to any cahce line
+adv:
+flexible: less conflict miss
+high hit ratio: better chace util
+
+adisadv:
+more comple: search entire cache
+slower: mroe hardare for comparison tags, more power
+
+
+op vs dma
+iop								dma
+dedicated processor to manage	data transffer directly io mem
+io tasks
+execute io instr				data transfer only
+cpu delegates io program to iop	cpu inities dma tehen dma indep
+mroe compelx					less complex
+slower for single transffer		faster for bulk transfer
+mroe expensive					less expensive
+in complex io systems			fast datra trnasfer
+
+
+io interface
+special hardawre between CPU and peripheral to supervise sync io transfers
+interface unit becasue tehy interface between processor bus and peripherals
+why?
+-peripherals are electromechanical/magnetic, their way of operting is
+diferent from that of CPU and memory which are electronic
+-data trnasfer date of peripherals is slower than that of CPU require sync
+-data format of perohperals differ from that in CPU and memory
+-operating modes of peripherals differ from each other and control is 
+needed to not distrub the operations od other perihperals connected
+
+Feature	Programmed I/O	Interrupt-driven I/O	Direct Memory Access (DMA)
+CPU Involvement	CPU polls device constantly	CPU is interrupted only when I/O is ready	CPU starts transfer, then DMA handles the rest
+Efficiency	Low (CPU is busy waiting)	Better than Programmed I/O	High (CPU is free during data transfer)
+Interrupt Usage	No	Yes	Yes (optional, only after transfer completes)
+Data Transfer Speed	Slow	Moderate	Fast
+CPU Time Usage	High (wastes cycles checking I/O status)	Moderate (only processes when needed)	Low (CPU free to do other tasks)
+Complexity	Simple	Moderate	Complex (requires DMA controller)
+Best Suited For	Simple and low-speed devices	Medium-speed peripherals	High-speed devices (e.g., disk, graphics)
+Example	Reading from a keyboard	Handling serial port with interrupts	Transferring data from hard disk to RAM
+
+hardwire cu vs microprogrammed cu
+hardwired					micropgrommed
+uses combinatoinal logic	ues microprogram in control memory
+gates flipfops to generate
+cntorl signals
+very fast (logic is direct 	slower(requires fetch decoding mi)
+and parallel)	
+complex difficult to modify	easy to design and modify
+inflexible					flexible
+riscv mips arm				nitel x86 motorolla 60800 amd
+risc-v						cisc
+expebnsive					less expensive
+
+
+isoalted iop				memory mapped io
+separta eio address space	io devices shar address space w mem
+special ins like in out		normal mem instr like mov lda sta
+limilted address range		large range same as mem
+complex ins set as reuqires	simpel noa dditrional ins
+dedicated io isntruc
+more memory for actual data less memory since some for io
+slower (extra decoding)		faster
+compelx harward for decode	simple hardware same as memory
+intel x86					arm

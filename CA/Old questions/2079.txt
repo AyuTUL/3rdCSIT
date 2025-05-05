@@ -1,0 +1,157 @@
+cache memmory:
+small high speed memory lcoated close to cpu that store frequently 
+accessed data/intrsuc
+to reduce average time to acces data from main memomry
+faster than RAM but smaller, acts as a buffer between cpu and main
+memor to speed up data access
+
+mapping process:
+determines how data from main memory is placed into cache
+since cache is smaller than main memory only a seuibset of memorry
+block can reside in cache at given time
+defines how memory blocks are assigned to acche lines
+
+direct mapping:
+each block of main memory mapts to exactly one cache line
+cache line =block address % no. of cache lines
+adv: simple,fast,hardware implement
+disadv:high conflict miss(different blocks cmopteing for same line)
+
+associative mapping:
+any block of main memory can be placed in any line of cache
+
+adv: flexible,minimize conflict misses
+disadv: complex and slower hardware(requres searching alll cahce lines)
+
+direct vs associative
+direct						associative
+one blocks map to one speci	any block can goto any line
+lines
+hardware complexity is low 	high(needs comparator for every)
+(usues modulo calcualtion)	line
+fast(simple index lookup)	slow(search entire cache)
+low flexible(prone to 		high flexible(less conflict miss)
+conflict miss)
+cache looked up by index+	full tag compariosn across all 
+tag comparison 				entries
+
+microprogrammed control unit:
+control signals are generaed by executing microprogram
+stored in special memory called control emmory
+
+to execute instr, sequencing logic sissues read command
+to control ememory
+word whose address is speciifed in CAR is read into CBR
+content of CBR generates contorl signals and next adress
+informaion for sequencing logic unit
+sequencing ogic unit laods new address info from CBR and flags
+
+
+adv: easier to modify thna hardwired,used in cisc
+disadv:
+slower due to overhead fetching /decoding micoinstruction 
+
+addresiing mode:
+specifies lcation of operand in an instruction
+
+implied: operands are implicitly speciifed
+cma,hlt,push
+
+immediate: opernad is actual data
+ld #7000
+
+direct: operand is address of data
+ld 1000
+
+indirect:operand is address of address containing data
+ld @1000
+
+register direct: operand is register containing data
+ld r1
+
+register indirect: operand is register containing addy of data
+ld (r1)
+
+auto incrment/decrement: operand is register containg addr
+of data which increment/decremented after each use
+ld (r1)+
+
+relative: operand is sum of address and pc
+ld $1000
+
+index: operand is sum of address and index register
+ld 1000(X)
+
+base register: operand is sum of address and base register:
+ld 1000(BR)
+
+dma:
+data transfer between peripherals and main memory without
+interactoin of cpu
+cpu relinquiehs memory bus ,free to perform other task
+and peripherals take control of memory bus using DMA controller
+
+to start dma process, io device sends dma request to controlelr
+cnotreolelr is a micro controller responsilve ffor trandse
+data between poeriphera and main memor with mininmal interva
+from cpu 3 registers:address,word count,contol
+cnotrllers sends dmaacl as response
+dma sends br to cpu
+in ersponse cpu terminates current executuion of isntr
+and relinquishes control of memory bus
+bg=0 cpu comms dma registers through data bus
+and activates rd wr as niput signal
+bg=1 controller starts dma process by direclty accesing
+main memory through address in address bus and activating
+rd wr as outpt lines
+cpu perfomrs other taks that do not reuqire memory bus
+when dma complete interrupt ti cpu bg=0 br=0
+
+
+microprogram sequencer:
+part of microprogrammed CU that generates address of next micro instruction
+to be executed from control memeory
+input logic has 3 inputs I0 I1 supplied by branch fieled of control
+mermory and T(test) by mux2. its output s0 s1 is supplied as select lines
+for mux1 and L(load) to SBR(subroutine register)
+mux 1 has 4 inputs, external MAP(memort addres pointer),sbr,addres field
+of conrtol memory and increment, selecets one and store in control address
+register(car)
+mux2 input 1 i s z select line from condition field of CM
+trut table
+
+risc vs cisc:
+risc 					cisc
+ins set is small simple			ins set is large complex
+ins length is fixed			ins length is varaible
+exe speed is faster(one per cycle)	slower(multiple cycles)
+specific ins load/store for memory acc	any instruction may access
+larger code size			smaller code size
+easy pipeline				harder pipeline
+hardwired control unit			micro programmed CU
+more data in regesters for less mem acc	more use of memort for less register
+arm risc-v mips				interl x86 amd motorolla 608000
+
+overlap register windows:
+used in risc to reduce procedure call overhead and speed up 
+execution by minimzing need to save and restore registers
+on stack during function call by using large set of register
+divided into overlapping wondows
+each windows has inptut lcoal ouptu registers
+when function is called, current function output regsiter
+become function input register(overlap) and new window
+is allocated for called function lcoal and outptsu
+
+hardwire cu vs microprogrammed cu
+hardwired					micropgrommed
+uses combinatoinal logic	ues microprogram in control memory
+gates flipfops to generate
+cntorl signals
+very fast (logic is direct 	slower(requires fetch decoding mi)
+and parallel)	
+complex difficult to modify	easy to design and modify
+inflexible					flexible
+riscv mips arm				nitel x86 motorolla 60800 amd
+risc-v						cisc
+expebnsive					less expensive
+

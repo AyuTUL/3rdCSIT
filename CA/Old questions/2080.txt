@@ -48,6 +48,7 @@ mux 1 has 4 inputs, external MAP(memort addres pointer),sbr,addres field
 of conrtol memory and increment, selecets one and store in control address
 register(car)
 mux2 input 1 i s z select line from condition field of CM
+trut table
 
 cache memory:
 small high speed memory located between cpu and main memory ram

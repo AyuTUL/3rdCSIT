@@ -1,0 +1,113 @@
+DDA:
+lien drawing algorthim to draw stragh line between 2 poitns in pixel gri
+incrementally calcutes middle opsition between start and end points
+using lfoat poitn arithtmetic
+
+window to viewport transformation:
+object together with window is translated to lower left corner of window
+at origoin
+object nad window are slaced until window has same dimensoin as viewpor
+translate viewport to correct positon on screen
+flowchart
+
+liang barsly
+more efficient than cohen sutherland
+parametric eqns line
+inequaliltites to describe range of clipping iwndow to determine
+intersection between line and clip window
+
+importance of filling algorithm
+rendering cksoed shape:
+seud to fill area bounded by edges
+improving realism:
+rendinrin soild objects by fililng interioir with color pattern
+user interaction;
+paint bucket tool
+efficeiny:
+avoilds filling maunally every pixel
+regoin based operation
+supports obejctd etection,pattern recognition,collison deteciton in game
+
+VR:
+technoolgy that creates immersive computer genraetd enivironemt that
+users can interact with using special deveices like VR headset,glove
+and controllers
+simulates areal/imaginary world making user fella as if they are 
+physically present in digital enviroment
+
+non immersive:
+cg envi thaht uesrs interact iwth standard screen like destop laptop
+not fully immersive expreiorence but some level of ineration
+flight simulatr games,3 modeilng software
+
+fully imersei
+complete virtual environent wher euser fell like they are phyiscally
+inseide digital workd
+speicla hardware like vr hedset,motion tracking sensor,haptic feedba
+vr gaming half life alyx,beat saber,training simutakl milityra,
+vr meetings
+
+semi immersive:
+mor eengaing than non but no fully replace real world like immer
+large sreen to create realistic experince
+flight training for pilot with multi screen,driving simultaor f1,
+mdeical training
+
+polygon table:
+type of plygon surface,boundary represnetaion that uses geometric
+table and attribute tables
+geomtetric:vertex,edge,polygon surface table
+vertext table:coordinate vleu for vertex
+edge table: edges and pointer to vertex table
+surac etable: surface and poitners backto edge table
+attribute table: qualitative properties like degree of transparency
+surface reflectivity
+
+polygon mesh:
+plygon surfac eboundary reprsentaion which is a collection of edges
+vertices and pllygons connected such that each edge is shared by at 
+most 2 polygons and vertex is hsared by at least 2 edges
+an edge connect 2 vertics and a polygon is a closed squence of edges
+triangle mesh,quadrlatearl mesh
+
+solid modeling:
+solid modeling is technique in cg to repesrnt 3d objects with well
+define strctiures for operatins like rednring,collision detection
+phyiscal simutlation in our compter
+
+sweep repressnetaiton:
+sweep is ued to make 3d from 2d having same symmetry
+moving 2d shape laong a path in space
+
+-translational sweepp:
+2d shape in moved along straight path to geenrated solid obetc
+shape is unchanged during translation
+
+-rotaional:
+2d shape in rotaed about an axis to form 3d solid instead of mov liear
+
+boundary representation:
+reprsted 3d objects using its boundary defined by vertex edge face
+for constructing solid model of unusal shapes
+reuqires large amount of storage
+
+sptial partiioning reprsetation:
+divides a space into smaller region for optimizing modeling
+decribse objects as collection of adjoining non intersection solids
+rending collsion detection ray tracing
+
+octree:
+3d quad tree
+divides 3d space into 8 equal sub regions
+recursivley sub divides into octants
+each level of tree represnets different levl of details
+each node resprsets ocatnt of space
+collision detection algorithm
+
+bsp:
+dividies 3d into 2 parts repeatedly until ceratin conditons met
+partiong plane is chose
+objects in scene are split into front and back
+process contine recursviley until each part meet srequied conds
+redninr and collsion detecion efficent
+visiblity determination

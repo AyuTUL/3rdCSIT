@@ -111,3 +111,44 @@ objects in scene are split into front and back
 process contine recursviley until each part meet srequied conds
 redninr and collsion detecion efficent
 visiblity determination
+
+phong shading:
+interpolate normal vector and apply illumination model to each
+surfac epoint
+by phong bui tuong more efficient method of polygon redering
+require slarge number of computations
+
+algprithm:
+determie average unit normal vector at each polygon vefrtex
+Nv=sum k=1 to n Nk/|Nk|
+	n:no. of surface of polkygon shading that vertec
+linearly interpolate vertex nomrlas over surface of polygon
+	N=y-y2/y1-y2 N1 + y1-y/y1-y2 N2
+Apply illumination model along eaceh sacn line to determine projected 
+pixel intersites at surface point
+
+fast phong:
+tries to approximate result of phong shading with less compuati
+-using lookup tables:
+uses lookup tables ofr exponentation/approximation formuleas instead
+of calcutaing expensive power functions for specular reflection
+-simplified specular term:
+replaces phong specualr model with cheaper alternative
+optimized normal interpolation:
+usus interplation trickls like sphjerical linear interpation to get
+smoother results faster
+-gpu friendly technieuq
+leverages harware shaders for paralelism and avoids brnaching if possibl
+
+opengl:
+open grpahics library is cross platform hardware independent api used
+for rending 2d 3d graphics
+by silicon gfrphics inc
+provides set of ficntoins to interract with gpu for rendinering high
+perfoeramcen graphics in games,cads,vr
+
+properties:
+cross platform:wondows,linux,macOS
+hardware acceleraed:uesus GPU for fast renreding
+Procedural API:uses C style function call to issure render commadnds
+sharder support: supports GLSL for programming pipileine

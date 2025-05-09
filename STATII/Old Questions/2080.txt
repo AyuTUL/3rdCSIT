@@ -1,0 +1,10 @@
+purpose of mutiple linear regression:
+liaer relationship between one dependent vairable and 2/more
+indepenent variable
+varaibles
+-prediction: estimate value of y based on known vlues of x
+-explaantion: understand value and significance of each x
+-control for confounding: adjust other factors to isolate effect
+of particular x
+-model complex relationship: capture itneraction and non linnear
+trends

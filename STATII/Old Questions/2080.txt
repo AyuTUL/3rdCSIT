@@ -1,10 +1,110 @@
-purpose of mutiple linear regression:
-liaer relationship between one dependent vairable and 2/more
-indepenent variable
-varaibles
--prediction: estimate value of y based on known vlues of x
--explaantion: understand value and significance of each x
--control for confounding: adjust other factors to isolate effect
-of particular x
--model complex relationship: capture itneraction and non linnear
-trends
+lsd:
+experimental design which has capacitiy to handle 2 knowwn nuisance
+source of variablity imultaneously as 2 indeoedent blocking criteria
+each trreamenet occurs once in each row and each column
+no. of treatmenets=no.of replicaiotns
+
+asumption:
+-interaction: 
+no interaction between:
+treatments:different factors
+blocking factors: row and column factors for c ontrolling extraneous var
+
+-equal levels:
+no. of leveles for each treament and blocking factor must be equal
+4 treatments(ABCD)=4 rows 4 cloumns
+
+-normality:
+errors should be normally distributed
+
+-homogenety of variance:
+vacraince/spread of errors should be consistent across all treatment
+gropus and blocks
+
+-independece of erros:
+error in one measurement should not influence error in another
+
+linear model of lsd:
+yijk=mu+alpha i + beta j + gamm k + eijk
+yijk:obs in ith row jth column kth treatment
+alpha i:efffect duee to ith row level of blocking factor
+beta j: effect due to jth lelve of colkmun blocking factor
+gammak: effect due to kth level of primary factor
+eijk:random error whichi is normally distributed with mean0 and variance
+
+estimation:
+process of using sample data to estimate a poluation parameter
+
+-point:single value(eg sample mean) is used as estimate
+-interval:range of values(confidence interval) within whihc parameter
+is likely to lie
+
+clt:
+statistical concept that states that sample mean distribution of a 
+random vraiable appraches normal distribtuin as sample size increaes
+regardless of shape of original poluation distribution
+sample size>=30
+average of sample mean and sd is will be eual to popn mean and sd
+
+multiple cororelkation coeff:
+closesness of assocaiton between obsdervue dof depoend variale y and
+its estimated value y cap given by regreesion eqn
+Ry.12
+perasion's correlation coeff between y and y cap
+
+design of experiment:
+statsitacal methdo of planning expermienst in a way data can be
+analyzed to yield valid and object concluse:
+-idinetify cause and effect relatiuonship bewteen varaibles
+-minimize varailbilty,maziminize information
+-optimize porcess/products
+randomizaiton,replicaion,blocking
+
+typ I error:
+error of rejecting null hypotheisis whjen it is actually treue
+prob of making type I error is significance level alpha
+aplha=prob(rejct h0/h0 treue)
+complementary prob 1-alpha is called confidence level
+
+type II error:
+error of accepting null hypothesis when it is actually flase
+prob pf makling type II error is beta
+beta=prob(accpet H0/ho false)
+complementary prob 1-beta is called power
+
+assumptionms of linear regression model:
+-linear relationship:
+relationship between dependent variable and independent variable is
+assumed to be linear
+checked by using scatter plt of residual vs predicted y value or
+observed vs predicted y
+
+-normality fo errors:
+residuals are assumed to be norammly distributed
+checked using historgram q-q plots
+
+-independece of errors:
+errors in one obs should not be related to error in another
+residual vs observation order
+
+-homoscedasticity:
+variance of residuals os constant across all levels of independent var
+residual vs predicted y
+
+-no multicollienarity:
+occurs when independet varialbes are highly correlated wit h each ther
+didifulft to determnine unique contribution of each var to model
+varaicne inflationary factor(IVF)
+
+-no mweasurement error in predictors:
+indpenednt variables should bne meausred accuirately
+
+stochastic process:
+sequqnce of random events that occur over time in some ordered fashion
+model stock prioces, weather patters, bilogical systems
+
+-discrerte time vs continuous
+-markov vs non markopv
+-stationary vs non
+-homogenous vs non
+-time dpeednet vs non

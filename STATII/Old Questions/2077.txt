@@ -1,0 +1,40 @@
+parametric test:
+makes assumptions about the popn distrivutoin from which sample is darwn
+assuems normal distribution of data and homogeniey of varaince
+t test z test ANOVA
+
+non prametric test:
+doesnt assume specific popn distribution
+data is ordinal nominal or assumption for para are violated
+mann whitney u kruskal wallish h
+
+adv:
+no need to assume normal distribtuion/ equal varainces
+works with small sazmple size
+can be used fior ordinal/categorical data
+less affected by extreme values
+
+disasv:
+less powerful
+loss of info since only ranks are focused not magnitude
+limited scope for comlpex experimental design
+
+m/m/1 system:
+most basic queueing model
+the queueing process is a continuous time markov process with
+-poisson arrivals(M):
+custmoers arrive randomly at mean rate lambda A and inter arrival time
+is exponential with mean rate of 1/lambda A
+
+-exponential service time(M):
+each customre is served at mean rate mu=lambda s
+
+-single server(1): 1 server is avaible
+-infinite queue capacity:no limit on customers witing
+-fcfs discipline: fifo
+-service times and interarrival tiems are independent
+
+banks with one teller
+customer servic desk with one employee helping customers one by one
+pople arriving at bus tops waitin for single bus to pick them up
+

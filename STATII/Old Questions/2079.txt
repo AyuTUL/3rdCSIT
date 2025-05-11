@@ -31,7 +31,16 @@ analyzed to yield valid and object concluse:
 -idinetify cause and effect relatiuonship bewteen varaibles
 -minimize varailbilty,maziminize information
 -optimize porcess/products
-randomizaiton,replicaion,blocking
+factor: varible controlled by experimetner
+level: specific value of a factor
+treatement: spefici combinatoin of traetment levels
+response: outcome measure from experiment
+experimentual unit: smallest division of experiment to which
+treatment is applied
+randomizaiton: randomly assigning treatments to experimatnet unit
+replicaion: repeating treatments to measure varaiblity/icre precision
+blocking: groupiong similar experimaental units to reduce effect of
+extraneous varaibe
 
 typ I error:
 error of rejecting null hypotheisis whjen it is actually treue

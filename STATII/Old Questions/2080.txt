@@ -30,7 +30,7 @@ yijk:obs in ith row jth column kth treatment
 alpha i:efffect duee to ith row level of blocking factor
 beta j: effect due to jth lelve of colkmun blocking factor
 gammak: effect due to kth level of primary factor
-eijk:random error whichi is normally distributed with mean0 and variance
+eijk:random error whichi is normally distributed with mean0 and variance sig2
 
 estimation:
 process of using sample data to estimate a poluation parameter

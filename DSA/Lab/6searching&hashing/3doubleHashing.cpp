@@ -12,11 +12,11 @@ class DoubleHashing
 	        for(int i=n-1;i>=2;i--) 
 			{
 	            bool isPrime=true;
-	            for (int j=2;j<=sqrt(i);j++) 
+	            for(int j=2;j<=sqrt(i);j++) 
 				{
 	                if(i%j==0) 
 					{
-	                    isPrime = false;
+	                    isPrime=false;
 	                    break;
 	                }
 	            }

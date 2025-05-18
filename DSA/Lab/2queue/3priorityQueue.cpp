@@ -43,7 +43,7 @@ class PriorityQueue
 	                        a[i]=a[j];
 	                        a[j]=tempItem;
 	                    }
-	                }
+	        }
         }
         void dequeue()
         {
@@ -51,7 +51,7 @@ class PriorityQueue
 				cout<<endl<<"Queue underflow"<<endl;
 			else
 			{
-				cout<<endl<<"Dequeued item  = "<<a[front]<<endl<<"Priority = "<<priority[front]<<endl;
+				cout<<endl<<"Dequeued item = "<<a[front]<<endl<<"Priority = "<<priority[front]<<endl;
 				if(rear==front)
 					rear=front=-1;
 				else
@@ -95,6 +95,7 @@ int main()
 				p.traverse();
 				break;
 			case 4:
+				cout<<"Exiting program";
 				exit(0);
 			default:
 				cout<<"Invalid input"<<endl;	
@@ -102,6 +103,6 @@ int main()
 		cout<<endl<<"Again? (Y/N) : ";
 		cin>>c;
 		system("cls");
-	}while(c=='y' ||c=='Y');
+	}while(c=='y' || c=='Y');
 	return 0;
 }

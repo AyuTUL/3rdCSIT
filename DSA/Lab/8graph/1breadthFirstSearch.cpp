@@ -29,7 +29,6 @@ class Queue
         }
         int dequeue()
         {
-            int item;
             if(isEmpty())
             {
                 cout<<endl<<"Queue underflow"<<endl;
@@ -37,7 +36,7 @@ class Queue
             }
             else
             {
-                item=a[front];
+                int item=a[front];
                 if(rear==front)
                     rear=front=-1;
                 else
@@ -46,7 +45,6 @@ class Queue
             }           
         }
 };
-
 void BFS(int g[MAX][MAX],int src,int V,char v[]) 
 {
     bool visited[MAX]={false};
@@ -75,9 +73,8 @@ int main()
     cout<<"Enter "<<V<<" vertices : ";
     for(int i=0;i<V;i++)
         cin>>v[i];
-    cout<<endl<<"Enter adjacency matrix :"<<endl;
-    cout<<"  ";
-    for(int i =0;i<V;i++)
+    cout<<endl<<"Enter adjacency matrix :"<<endl<<"  ";
+    for(int i=0;i<V;i++)
         cout<<" "<<v[i];
     cout<<endl;
 	for(int i=0;i<V;i++)

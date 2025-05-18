@@ -74,7 +74,7 @@ class Deque
 				cout<<endl<<"Queue underflow"<<endl;
 			else
 			{
-				cout<<endl<<"Dequeued item  = "<<a[rear]<<endl;
+				cout<<endl<<"Dequeued item = "<<a[rear]<<endl;
 				if(front==rear)
 					front=rear=-1;
 				else if(rear==0)
@@ -103,7 +103,7 @@ int main()
 	Deque d;
 	do
 	{
-		cout<<"Double Ended Operations :\n1. Enqueue\n2. Dequeue\n3. Traverse\n4. Exit\nEnter your choice : ";
+		cout<<"Double Ended Queue Operations :\n1. Enqueue\n2. Dequeue\n3. Traverse\n4. Exit\nEnter your choice : ";
 		cin>>ch1;
 		switch(ch1)
 		{
@@ -138,6 +138,6 @@ int main()
 		cout<<endl<<"Again? (Y/N) : ";
 		cin>>c;
 		system("cls");
-	}while(c=='y' ||c=='Y');
+	}while(c=='y' || c=='Y');
 	return 0;
 }

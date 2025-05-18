@@ -5,22 +5,22 @@
 using namespace std;
 int minDistance(int d[],bool visited[],int V) 
 {
-    int min=INF,min_index=-1;
+    int min=INF,minIndex=-1;
     for(int v=0;v<V;v++)
         if(!visited[v] && d[v]<=min) 
         {
         	min=d[v];
-			min_index=v;
+			minIndex=v;
 		}      
-    return(min_index);
+    return(minIndex);
 }
 char source;
-void print(int d[], int V, char v[]) 
+void print(int d[],int V,char v[]) 
 {
     cout<<endl<<"+----------+-----------------------------+"<<endl;
     cout<<"|  Vertex  |  Distance from Source ( "<<source<<" ) |";
     cout<<endl<<"+----------+-----------------------------+"<<endl;
-    for(int i = 0; i < V; i++) 
+    for(int i=0;i<V;i++) 
         cout<<"|"<<setw(5)<<v[i]<<setw(6)<<"|"<<setw(15)<<d[i]<<setw(15)<<"|"<<endl;
     cout<<"+----------+-----------------------------+"<<endl;
 }
@@ -53,8 +53,7 @@ int main()
     cout<<"Enter "<<V<<" vertices : ";
     for(int i=0;i<V;i++)
         cin>>v[i];
-    cout<<endl<<"Enter adjacency matrix :"<<endl;
-    cout<<"  ";
+    cout<<endl<<"Enter adjacency matrix :"<<endl<<"  ";
     for(int i =0;i<V;i++)
         cout<<" "<<v[i];
     cout<<endl;

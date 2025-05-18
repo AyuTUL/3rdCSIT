@@ -100,6 +100,6 @@ int main()
 		cout<<endl<<"Again? (Y/N) : ";
 		cin>>c;
 		system("cls");
-	}while(c=='y' ||c=='Y');
+	}while(c=='y' || c=='Y');
 	return 0;
 }

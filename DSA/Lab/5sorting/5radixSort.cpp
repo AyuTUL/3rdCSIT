@@ -63,10 +63,10 @@ class Queue
                 cout<<endl<<"Queue underflow" << endl;
             else
             {
-                cout << endl;
-                for(int i = front; i <= rear; i++)
-                    cout << a[i] << "\t";
-                cout << endl;
+                cout<<endl;
+                for(int i=front;i<=rear;i++)
+                    cout<<a[i]<<"\t";
+                cout<<endl;
             }
         }
 };
@@ -82,8 +82,8 @@ void radix(int *a,int n)
 {
     int max=getMax(a,n),divisor=1;
     Queue q[10];
-   while(max/divisor>0) 
-   {
+    while(max/divisor>0) 
+    {
         for(int i=0;i<n;i++) 
 		{
             int digit=(a[i]/divisor)%10;

@@ -1,0 +1,92 @@
+purpose of mutiple linear regression:
+liaer relationship between one dependent vairable and 2/more
+indepenent variable
+varaibles
+-prediction: estimate value of y based on known vlues of x
+-explaantion: understand value and significance of each x
+-control for confounding: adjust other factors to isolate effect
+of particular x
+-model complex relationship: capture itneraction and non linnear
+trends
+
+assumptions involed in t test for testing significant 
+difference ebtween 2 sample means(paired t test)
+-dependent variable is continuous (interval/ratio scale data)
+-sample must be related/dependent
+-random sample of data
+-difference between paired values must be approximately normally distributed
+- no outliers in the difference between 2 related groups
+
+design of experiment:
+statsitacal methdo of planning expermienst in a way data can be
+analyzed to yield valid and object concluse:
+-idinetify cause and effect relatiuonship bewteen varaibles
+-minimize varailbilty,maziminize information
+-optimize porcess/products
+randomizaiton,replicaion,blocking
+
+lsd:
+experimental design which has capacitiy to handle 2 knowwn nuisance
+source of variablity imultaneously as 2 indeoedent blocking criteria
+each trreamenet occurs once in each row and each column
+no. of treatmenets=no.of replicaiotns
+
+Explain why the number of treatments tested in a Latin Square Design
+ should not be less than 3?
+prevent df to be -ve or zero
+balance treatm one  per ow column
+control varaivlity
+
+confidence level:
+probability that interval estimate will contain the paramener theta
+1-alpha
+
+partial cooreation coeff:
+meausres relation between 2 varaibles whjile controlling effect of 
+1/more varaibles
+isolates direct association between 2 variables by removing effect
+of confounding variables
+1st 2nd 3rd o rder(controlled effect of 1,2,3/more var)
+
+multiple cororelkation coeff:
+closesness of assocaiton between obsdervue dof depoend variale y and
+its estimated value y cap given by regreesion eqn
+Ry.12
+perasion's correlation coeff between y and y cap
+
+significance level in hypothesis testing:
+error of rejecting null hypothesis when it is true is type I error
+probability of makling type 1 error is called siginifance level
+alpha=prob(reject H0/H0 true)
+
+queuing theory:
+queuins system in context of stochastic process is a mathematical
+model used tod escribe systems in which entities arrive randomyl
+over time and wait in a queue to be served by 1/more servers
+eg: waiting for bus,waiting in supermarkets,fast food drive thorugh
+
+components:
+-arrival prccoess:
+describes fhow entities arrive at queueing system
+time betweeen arrivals are assumed to be random,commonly poisson
+
+-queueing & routing to servers:
+queue is where enntites wait for their turn at service faicilty
+
+-server mehcanism:
+how customers are served after joining a queue
+
+-queue discipline:
+rule by which entities in queu are selected for service
+FIFO LIFO priorty
+
+-departure:
+once service is complete, entities exit the system
+may include post service feedback
+
+clt:
+statistical concept that states that sample mean distribution of a 
+random vraiable appraches normal distribtuin as sample size increaes
+regardless of shape of original poluation distribution
+sample size>=30
+average of sample mean and sd is will be eual to popn mean and sd

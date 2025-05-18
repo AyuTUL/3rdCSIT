@@ -1,0 +1,25 @@
+linear model of lsd:
+yijk=mu+alpha i + beta j + gamm k + eijk
+yijk:obs in ith row jth column kth treatment
+alpha i:efffect duee to ith row level of blocking factor
+beta j: effect due to jth lelve of colkmun blocking factor
+gammak: effect due to kth level of primary factor
+eijk:random error whichi is normally distributed with mean0 and variance sig2
+
+markov chain:
+stochastic process that undergoes transition from one state to another
+in a state spacce where the probability of moving to next state depends 
+only on current state and not previous
+
+properties:
+-markov property:
+future state depends oon only current state not sequqnce of events before
+-stae space:
+can be finite or countably infiinte
+-inital distribution:
+specifies probability of s tarting in each state
+-stationary didstribution:
+probability distribtuion pi uch taht piP=pi
+represent long term behaviour of chain
+
+why use non parametric test:

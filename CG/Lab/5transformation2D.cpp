@@ -1,7 +1,6 @@
 #include<iostream>
 #include<conio.h>
 #include<graphics.h>
-#include<stdio.h>
 #include<math.h>
 #define PI 3.141
 using namespace std;
@@ -34,6 +33,7 @@ Point rotate(Point p,float angle,Point center)
 }
 int main()
 {
+	system("color f0");
 	int gd=DETECT,gm,choice;
 	initgraph(&gd,&gm,NULL);
 	if(graphresult()!=grOk)
@@ -42,9 +42,11 @@ int main()
         return 1;
     }
     Point p1,p2,p3;
-    cout<<"Enter coordinates of triangle : ";
-    cin>>p1.x>>p1.y>>p2.x>>p2.y>>p3.x>>p3.y;
-    do 
+    cout<<"Enter coordinates of triangle :"<<endl;
+    cout<<"Point 1 (x1,y1) : ";cin>>p1.x>>p1.y;
+    cout<<"Point 2 (x2,y2) : ";cin>>p2.x>>p2.y;
+    cout<<"Point 3 (x3,y3) : ";cin>>p3.x>>p3.y; 
+	do
 	{
 		cleardevice();
         setcolor(WHITE);

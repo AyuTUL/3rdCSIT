@@ -21,7 +21,7 @@ void bresenham(int x1,int y1,int x2,int y2)
 		y=y1;
 		xend=x2;
 	}
-	putpixel(x,y,WHITE);	
+	putpixel(x,y,BLACK);	
 	while(x<xend)
 	{
 		x++;
@@ -32,7 +32,7 @@ void bresenham(int x1,int y1,int x2,int y2)
 			y+=stepY;
 			p+=2*(dy-dx);
 		}
-		putpixel(x,y,WHITE);
+		putpixel(x,y,BLACK);
 	}
 }
 int main()
@@ -54,7 +54,7 @@ int main()
 	outtextxy(10,20,"Bresenham Line Drawing Algorithm");
 	sprintf(start,"(%d,%d)",x1,y1);
 	sprintf(end,"(%d,%d)",x2,y2);
-	outtextxy(x1+5,y1-5,start);
+	outtextxy(x1+5,y1+5,start);
 	outtextxy(x2+5,y2+5,end);
 	getch();
 	closegraph();
